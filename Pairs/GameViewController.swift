@@ -13,6 +13,8 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     var diffPassedOver : String!
     let items = ["0","1","2","3","4","5"]
     
+    let danielle = "Love of my life"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(diffPassedOver)
