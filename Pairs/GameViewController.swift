@@ -38,6 +38,8 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
 
     
     
+    let danielle = "Love of my life"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
