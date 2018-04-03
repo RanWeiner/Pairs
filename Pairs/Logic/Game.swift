@@ -16,8 +16,10 @@ class Game{
     
   
     var allCards = [Card]()
-    var lastCardChoosen : Card?
+
     var lastIndexPath : IndexPath?
+    
+    var lastIndex : Int = -1
     
     var difficulty : String
     var numOfPairs : Int
@@ -57,6 +59,81 @@ class Game{
             let card = Card()
             allCards.append(card)
             allCards.append(card)
+        }
+    }
+    
+    
+    
+    func checkMatch(cardIndex : Int) -> Bool{
+        if allCards[cardIndex].cardId == allCards[lastIndex].cardId {
+            allCards[cardIndex].isMatched = true
+            allCards[lastIndex].isMatched = true
+            lastIndex = -1
+            return true
+        }
+        return false
+    }
+    
+    
+    
+    func isGameOver() -> Bool{
+        for card in allCards {
+            if !card.isMatched{
+                return false
+            }
+        }
+        return true
+    }
+    
+    
+    
+    func showCard(cardIndex : Int){
+         allCards[cardIndex].isOpen = true
+    }
+    
+    
+    
+    func closeCard(cardIndex : Int){
+        allCards[cardIndex].isOpen = false
+    }
+
+    
+    
+    func selectCard(index : Int){
+        
+        var selectedCard = allCards[index]
+        
+        if selectedCard.isMatched {return}
+        
+        //card open
+        if selectedCard.isOpen{
+            closeCard(cardIndex: index)
+            
+        //card closed
+        } else {
+            
+            showCard(cardIndex: index)
+            
+            if lastIndex == -1 {
+                lastIndex = index
+            }
+                
+            else {
+                //has match
+                if checkMatch(cardIndex : index){
+                    if isGameOver() {
+                        print("game finished")
+                    }
+                }
+                //no match
+                else {
+                    closeCard(cardIndex: index)
+                    closeCard(cardIndex: lastIndex)
+                    lastIndex = -1
+                }
+            }
+            
+         
         }
     }
     

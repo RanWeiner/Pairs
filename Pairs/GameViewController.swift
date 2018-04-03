@@ -13,9 +13,22 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     var diffPassedOver : String!
     var cards = [Card]()
     var gameManager: Game!
+   // let cardImages = ["backofcard" , "banana" , "apple" , "coconut", "grape" , "kiwi" , "orange" ,  "pear" , "pinapple" , "strawberry" , "watermelon" ]
     
-    let cardBackImage = UIImage(named:"backofcard")
-
+    var cardImages: [UIImage] = [
+        UIImage(named: "backofcard")!,
+        UIImage(named: "banana")!,
+        UIImage(named: "apple")!,
+        UIImage(named: "coconut")!,
+        UIImage(named: "grape" )!,
+        UIImage(named: "kiwi")!,
+        UIImage(named: "orange")!,
+        UIImage(named: "pear")!,
+        UIImage(named: "pinapple")!,
+        UIImage(named: "strawberry")!,
+        UIImage(named: "watermelon")!
+    ]
+    
     
     
     override func viewDidLoad() {
@@ -42,58 +55,44 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
         
-        var id = cards[indexPath.item].cardId
-        
+        var id = cards[indexPath.item].cardId // just for debugging
         cell.myLabel.text =  String(id)
-        cell.cardImage.image = cardBackImage
+        
+        var allCards = gameManager.allCards
+        
+        if allCards[indexPath.item].isMatched || allCards[indexPath.item].isOpen{
+            cell.cardImage.image = cardImages[allCards[indexPath.item].cardId]  //show front of the card
+        }
+        else {
+            cell.cardImage.image = cardImages[0] //show back of the card
+        }
         
         return cell
     }
    
     
     
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var cell = collectionView.cellForItem(at: indexPath) as! CollectionViewCell
-        var index = indexPath.item
-        var chosenCard = cards[index]
         
+        let cell = collectionView.cellForItem(at: indexPath) as! CollectionViewCell
+        let index = indexPath.item
+       
+        gameManager.selectCard(index: index)
         
-        if (chosenCard.isMatched){return}
+        var allCards = gameManager.allCards
         
-        if chosenCard.isOpen{
-            chosenCard.isOpen = false
-            cell.cardImage.image = cardBackImage
+        if allCards[index].isMatched || allCards[index].isOpen {
+            
+            cell.cardImage.image = cardImages[allCards[index].cardId]
             CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
-            if gameManager.lastIndexPath != nil{
-                gameManager.lastIndexPath = nil
-            }
-            
-        }else{
-            chosenCard.isOpen = true
-            cell.cardImage.image = UIImage(named: "banana")
-            CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromRight, animations: nil, completion: nil)
-            if gameManager.lastIndexPath == nil{
-                gameManager.lastIndexPath = indexPath
-            }
-            else {
-                if chosenCard.cardId == cards[gameManager.lastIndexPath!.item].cardId {
-                    cards[gameManager.lastIndexPath!.item].isMatched = true
-                    chosenCard.isMatched = true
-                    gameManager.lastIndexPath = nil
-                }
-                else{
-                    chosenCard.isOpen = false
-                    cell.cardImage.image = cardBackImage
-                    var lastCell : CollectionViewCell = collectionView.cellForItem(at: gameManager.lastIndexPath!) as! CollectionViewCell
-                    lastCell.cardImage.image = cardBackImage
-                    cards[gameManager.lastIndexPath!.item].isOpen = false
-                    gameManager.lastIndexPath = nil
-                }
-            }
-            
-            
+
         }
         
+        else {
+            cell.cardImage.image = cardImages[0]
+            CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromRight, animations: nil, completion: nil)
+        }
         
         
     }
