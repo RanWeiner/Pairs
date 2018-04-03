@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+ 
 struct Card{
     var cardId : Int
     var isOpen = false
