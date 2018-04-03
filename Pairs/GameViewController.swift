@@ -14,31 +14,9 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     var cards = [Card]()
     var gameManager: Game!
     
-    
     let cardBackImage = UIImage(named:"backofcard")
-    
-    /*
-    let easyCardImages : [UIImage] = [
-        
-        
-        ]
-
-    let mediumCardImages : [UIImage] = [
-        
-        
-    ]
-     
-    let hardCardImages : [UIImage] = [
-        
-        
-    ]
- */
-    
-
 
     
-    
-    let danielle = "Love of my life"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +26,6 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         cards = gameManager.allCards
         
     
-     
         // Do any additional setup after loading the view.
     }
 
@@ -59,7 +36,6 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cards.count
-      
        
     }
  
