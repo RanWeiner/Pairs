@@ -55,13 +55,14 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
         
-        var id = cards[indexPath.item].cardId // just for debugging
-        cell.myLabel.text =  String(id)
+      //  var id = cards[indexPath.item].cardId // just for debugging
+       // cell.myLabel.text =  String(id)
         
         var allCards = gameManager.allCards
+        let index = indexPath.item
         
-        if allCards[indexPath.item].isMatched || allCards[indexPath.item].isOpen{
-            cell.cardImage.image = cardImages[allCards[indexPath.item].cardId]  //show front of the card
+        if allCards[index].isMatched || allCards[index].isOpen{
+            cell.cardImage.image = cardImages[allCards[index].cardId]  //show front of the card
         }
         else {
             cell.cardImage.image = cardImages[0] //show back of the card
