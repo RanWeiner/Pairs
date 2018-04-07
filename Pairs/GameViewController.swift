@@ -13,7 +13,6 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     var diffPassedOver : String!
     var cards = [Card]()
     var gameManager: Game!
-   // let cardImages = ["backofcard" , "banana" , "apple" , "coconut", "grape" , "kiwi" , "orange" ,  "pear" , "pinapple" , "strawberry" , "watermelon" ]
     
     var cardImages: [UIImage] = [
         UIImage(named: "backofcard")!,
@@ -29,7 +28,7 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         UIImage(named: "watermelon")!
     ]
     
-    
+    var lastCell : CollectionViewCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,15 +53,19 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
  
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
+    
+       
         
-      //  var id = cards[indexPath.item].cardId // just for debugging
-       // cell.myLabel.text =  String(id)
+         cell.myLabel.text = String(cards[indexPath.item].cardId)
         
-        var allCards = gameManager.allCards
         let index = indexPath.item
         
-        if allCards[index].isMatched || allCards[index].isOpen{
-            cell.cardImage.image = cardImages[allCards[index].cardId]  //show front of the card
+        if cards[index].isMatched {
+        
+            cell.cardImage.image = cardImages[cards[index].cardId]  //show front of the card
+            
+        } else if cards[index].isOpened {
+            cell.cardImage.image = cardImages[cards[index].cardId]  //show front of the card
         }
         else {
             cell.cardImage.image = cardImages[0] //show back of the card
@@ -77,36 +80,45 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let cell = collectionView.cellForItem(at: indexPath) as! CollectionViewCell
-        let index = indexPath.item
+        let currentIndex = indexPath.item
        
-        gameManager.selectCard(index: index)
         
-        var allCards = gameManager.allCards
-        
-        if allCards[index].isMatched || allCards[index].isOpen {
-            
-            cell.cardImage.image = cardImages[allCards[index].cardId]
-            CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
+     
 
+        gameManager.selectCard(index:  currentIndex)
+        
+        cards = gameManager.allCards
+        
+        if cards[currentIndex].isMatched {
+            
+            cell.cardImage.image = cardImages[cards[currentIndex].cardId]
+            CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
+        
+            lastCell = nil
+
+        } else if cards[currentIndex].isOpened {
+            if lastCell == nil {
+                lastCell = cell
+            }
+    
+            cell.cardImage.image = cardImages[cards[currentIndex].cardId]
+            CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
         }
         
         else {
+            if lastCell != nil {
+                lastCell?.cardImage.image = cardImages[0]
+                CollectionViewCell.transition(with: lastCell!, duration: 0.3, options: .transitionFlipFromRight, animations: nil, completion: nil)
+            }
+        
             cell.cardImage.image = cardImages[0]
             CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromRight, animations: nil, completion: nil)
+            lastCell = nil
         }
         
+
         
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

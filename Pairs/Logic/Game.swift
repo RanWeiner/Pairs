@@ -16,8 +16,6 @@ class Game{
     
   
     var allCards = [Card]()
-
-    var lastIndexPath : IndexPath?
     
     var lastIndex : Int = -1
     
@@ -55,20 +53,26 @@ class Game{
     
     
     func setCards(){
+        var items = [Card]()
+        
         for _ in 1...numOfPairs{
             let card = Card()
-            allCards.append(card)
-            allCards.append(card)
+            items.append(card)
+            items.append(card)
+        }
+        
+        for _ in 1...items.count{
+            let rand = Int(arc4random_uniform(UInt32(items.count)))
+            allCards.append(items[rand])
+            items.remove(at: rand)
         }
     }
     
     
     
-    func checkMatch(cardIndex : Int) -> Bool{
+    func hasMatch(cardIndex : Int) -> Bool{
+       
         if allCards[cardIndex].cardId == allCards[lastIndex].cardId {
-            allCards[cardIndex].isMatched = true
-            allCards[lastIndex].isMatched = true
-            lastIndex = -1
             return true
         }
         return false
@@ -77,67 +81,79 @@ class Game{
     
     
     func isGameOver() -> Bool{
-        for card in allCards {
-            if !card.isMatched{
-                return false
-            }
+        if numOfPairs == 0 {
+            return true
         }
-        return true
+        return false
     }
     
     
     
     func showCard(cardIndex : Int){
-         allCards[cardIndex].isOpen = true
+         allCards[cardIndex].isOpened = true
     }
     
     
     
     func closeCard(cardIndex : Int){
-        allCards[cardIndex].isOpen = false
+        allCards[cardIndex].isOpened = false
     }
-
+    
+    
     
     
     func selectCard(index : Int){
         
-        var selectedCard = allCards[index]
+        let selectedCard = allCards[index]
         
         if selectedCard.isMatched {return}
         
+        
         //card open
-        if selectedCard.isOpen{
+        if selectedCard.isOpened{
             closeCard(cardIndex: index)
+           
             
         //card closed
         } else {
-            
             showCard(cardIndex: index)
             
             if lastIndex == -1 {
                 lastIndex = index
-            }
+                }
                 
             else {
-                //has match
-                if checkMatch(cardIndex : index){
-                    if isGameOver() {
-                        print("game finished")
+                if hasMatch(cardIndex: index){
+                  
+                    allCards[index].isMatched = true
+                    allCards[lastIndex].isMatched = true
+                    lastIndex = -1
+                    
+                    numOfPairs-=1
+                    if isGameOver(){
+                        print("finito!")
                     }
                 }
-                //no match
+          
                 else {
                     closeCard(cardIndex: index)
                     closeCard(cardIndex: lastIndex)
                     lastIndex = -1
-                }
+
             }
+        
+            }
+    
+    
+}
+}
+}
             
          
-        }
-    }
+    
+    
     
   
     
     
-}
+
