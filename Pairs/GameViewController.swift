@@ -10,7 +10,11 @@ import UIKit
 
 class GameViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate {
 
-    let TileMargin = CGFloat(5.0)
+    @IBOutlet weak var timerLabel: UILabel!
+    
+    var countdownTimer = Timer()
+    var seconds: Int = 60
+    
     var diffPassedOver : String!
     
     var cards = [Card]()
@@ -38,17 +42,15 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         gameManager = Game(chosenDifficulty : diffPassedOver)
         cards = gameManager.allCards
+        startTimer()
         
-    
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {		
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -164,6 +166,36 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
             
         }
     }
+    
+    func startTimer(){
+        countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
+        
+    }
+    
+ @objc func updateTime(){
+        timerLabel.text = "\(self.seconds)"
+        if seconds > 0 {
+            seconds -= 1
+        }
+        else {
+            countdownTimer.invalidate()
+            gameOver()
+        }
+    }
+    
+    
+    
+    func gameOver(){
+        
+        let alert = UIAlertController(title: "Oh No!", message: "You run out of time, better luck next time!", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {action in
+            self.performSegue(withIdentifier: "selectDifficulty", sender: self)
+        }))
+        present(alert, animated: true, completion: nil)
+        
+        
+    }
+    
     
     
 
