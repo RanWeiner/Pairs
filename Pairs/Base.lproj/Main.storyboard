@@ -8,6 +8,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Zapfino.ttf">
+            <string>Zapfino</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Main View Controller-->
         <scene sceneID="fbx-tq-w5H">
@@ -39,7 +44,7 @@
                         <viewLayoutGuide key="safeArea" id="LBu-q7-8R9"/>
                     </view>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="goToDifficultyScreen" id="x5K-xf-e35"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="selectDifficulty" id="x5K-xf-e35"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y8l-YN-9s0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -47,10 +52,10 @@
             </objects>
             <point key="canvasLocation" x="-327.19999999999999" y="36.431784107946029"/>
         </scene>
-        <!--View Controller-->
+        <!--Difficulty View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Pairs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="DifficultyViewController" customModule="Pairs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -73,12 +78,12 @@
                     </view>
                     <connections>
                         <outlet property="diffPicker" destination="JYk-DK-vHL" id="kEa-fU-epI"/>
-                        <segue destination="DTU-FP-Fj1" kind="show" identifier="goToGameScreen" id="mfi-NP-cEq"/>
+                        <segue destination="DTU-FP-Fj1" kind="show" identifier="startGame" id="mfi-NP-cEq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="570" y="37"/>
+            <point key="canvasLocation" x="569" y="37"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="v9C-hD-7XI">
@@ -89,34 +94,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qS5-hX-ZSY">
-                                <rect key="frame" x="0.0" y="32" width="375" height="635"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="635"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="aYC-5d-aLG">
-                                    <size key="itemSize" width="167" height="181"/>
+                                    <size key="itemSize" width="114" height="126"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="oxr-Se-tPZ" customClass="CollectionViewCell" customModule="Pairs" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="167" height="181"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="114" height="126"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="167" height="181"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="114" height="126"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DLx-jg-qCi">
-                                                    <rect key="frame" x="0.0" y="0.0" width="166" height="156"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ox-If-hX9">
-                                                    <rect key="frame" x="56" y="154" width="42" height="21"/>
+                                                    <rect key="frame" x="50" y="110" width="42" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DLx-jg-qCi">
+                                                    <rect key="frame" x="7" y="0.0" width="107" height="106"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <connections>
@@ -134,10 +139,62 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="iDG-6A-rRY"/>
                     </view>
+                    <connections>
+                        <segue destination="mQs-5A-joq" kind="show" identifier="endGame" id="SxB-6T-l8x"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mhR-Jd-GIa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1456.8" y="37.331334332833585"/>
         </scene>
+        <!--End Game View Controller-->
+        <scene sceneID="eQh-O2-aV9">
+            <objects>
+                <viewController id="mQs-5A-joq" customClass="EndGameViewController" customModule="Pairs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pLo-RL-nGT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZeN-rB-o2Z">
+                                <rect key="frame" x="147" y="513" width="80" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Start Over"/>
+                                <connections>
+                                    <action selector="startOverBtn:" destination="mQs-5A-joq" eventType="touchUpInside" id="KX8-yF-yjv"/>
+                                    <action selector="startOverBtnPressed:" destination="mQs-5A-joq" eventType="touchUpInside" id="nXO-UZ-QYp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d3o-PA-Mzw">
+                                <rect key="frame" x="148" y="569" width="79" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Main Menu"/>
+                                <connections>
+                                    <action selector="mainMenuBtnPressed:" destination="mQs-5A-joq" eventType="touchUpInside" id="OBS-SO-BdU"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Congratulations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f5I-ec-cjQ">
+                                <rect key="frame" x="32" y="132" width="316" height="98"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="2Nq-hd-4Dn"/>
+                    </view>
+                    <connections>
+                        <segue destination="DTU-FP-Fj1" kind="show" identifier="startOver" id="yqM-tz-ziG"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="mainMenu" id="3yt-qm-8CT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EDY-fA-xaa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2302" y="37"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="mfi-NP-cEq"/>
+        <segue reference="x5K-xf-e35"/>
+    </inferredMetricsTieBreakers>
 </document>

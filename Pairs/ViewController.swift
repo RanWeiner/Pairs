@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController , UIPickerViewDataSource, UIPickerViewDelegate{
+class DifficultyViewController: UIViewController , UIPickerViewDataSource, UIPickerViewDelegate{
 
     @IBOutlet weak var diffPicker: UIPickerView!
     
@@ -46,11 +46,11 @@ class ViewController: UIViewController , UIPickerViewDataSource, UIPickerViewDel
     }
 
     @IBAction func buttonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "goToGameScreen", sender: self)
+        performSegue(withIdentifier: "startGame", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToGameScreen" {
+        if segue.identifier == "startGame" {
             let destinationVC = segue.destination as! GameViewController
             destinationVC.diffPassedOver = diffChosen
         

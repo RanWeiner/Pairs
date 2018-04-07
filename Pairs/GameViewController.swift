@@ -5,16 +5,18 @@
 //  Created by Ran Weiner on 3/28/18.
 //  Copyright © 2018 Ran Weiner. All rights reserved.
 //
-
+import Foundation
 import UIKit
 
 class GameViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate {
 
+    let TileMargin = CGFloat(5.0)
     var diffPassedOver : String!
+    
     var cards = [Card]()
     var gameManager: Game!
     
-    var cardImages: [UIImage] = [
+    let cardImages: [UIImage] = [
         UIImage(named: "backofcard")!,
         UIImage(named: "banana")!,
         UIImage(named: "apple")!,
@@ -30,11 +32,14 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     var lastCell : CollectionViewCell?
     
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         gameManager = Game(chosenDifficulty : diffPassedOver)
-        
         cards = gameManager.allCards
         
     
@@ -50,7 +55,8 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         return cards.count
        
     }
- 
+    
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
     
@@ -87,14 +93,18 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
 
         gameManager.selectCard(index:  currentIndex)
         
-        cards = gameManager.allCards
+        cards = gameManager.allCards //maybe unesseccery
         
         if cards[currentIndex].isMatched {
-            
+        
             cell.cardImage.image = cardImages[cards[currentIndex].cardId]
             CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
         
             lastCell = nil
+            
+            if gameManager.isGameOver() {
+                performSegue(withIdentifier: "endGame", sender: self)
+            }
 
         } else if cards[currentIndex].isOpened {
             if lastCell == nil {
@@ -106,19 +116,57 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         }
         
         else {
-            if lastCell != nil {
-                lastCell?.cardImage.image = cardImages[0]
-                CollectionViewCell.transition(with: lastCell!, duration: 0.3, options: .transitionFlipFromRight, animations: nil, completion: nil)
+            
+            if lastCell != nil && lastCell != cell {
+                
+                cell.cardImage.image = cardImages[cards[currentIndex].cardId]
+                CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
+                
+                DispatchQueue.global(qos:.background).asyncAfter(deadline: DispatchTime.now()+1){
+                    DispatchQueue.main.async {
+                      
+                        self.lastCell?.cardImage.image = self.cardImages[0]
+                        CollectionViewCell.transition(with: self.lastCell!, duration: 0.3, options: .transitionFlipFromRight, animations: nil, completion: nil)
+                        
+                        cell.cardImage.image = self.cardImages[0]
+                        CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromRight, animations: nil, completion: nil)
+                        
+                        self.lastCell = nil
+                    }
+                }
+                
+                
             }
-        
-            cell.cardImage.image = cardImages[0]
-            CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromRight, animations: nil, completion: nil)
-            lastCell = nil
-        }
+                
+            
+            else {
+                
+                cell.cardImage.image = self.cardImages[0]
+                CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromRight, animations: nil, completion: nil)
+                self.lastCell = nil
+                
+                
+            }
+          
+            }
+ 
         
 
         
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "endGame" {
+            let destinationVC = segue.destination as! EndGameViewController
+            destinationVC.difficulty = diffPassedOver
+            
+        }
+    }
+    
+    
+
     
 
 }

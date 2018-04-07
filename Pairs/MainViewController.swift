@@ -11,7 +11,7 @@ import UIKit
 class MainViewController: UIViewController {
 
     @IBAction func nextButton(_ sender: UIButton) {
-        performSegue(withIdentifier: "goToDifficultyScreen", sender: self)
+        performSegue(withIdentifier: "selectDifficulty", sender: self)
 
     }
     override func viewDidLoad() {

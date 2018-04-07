@@ -112,6 +112,7 @@ class Game{
         //card open
         if selectedCard.isOpened{
             closeCard(cardIndex: index)
+            lastIndex = -1
            
             
         //card closed
