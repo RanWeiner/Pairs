@@ -37,7 +37,8 @@ class MainViewController: UIViewController {
             showAlert()
             return
         }
-      
+        
+        Player.sharedInstance.name = text
         performSegue(withIdentifier: "selectDifficulty", sender: self)
         
     }

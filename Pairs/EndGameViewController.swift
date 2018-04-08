@@ -12,8 +12,12 @@ class EndGameViewController: UIViewController {
 
     var difficulty : String!
 
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        nameLabel.text = Player.sharedInstance.name
 
     }
 

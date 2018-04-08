@@ -10,6 +10,7 @@ import UIKit
 
 class GameViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate {
 
+    @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     
     var countdownTimer = Timer()
@@ -18,6 +19,7 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     var diffPassedOver : String!
     
     var cards = [Card]()
+    
     var gameManager: Game!
     
     let cardImages: [UIImage] = [
@@ -42,7 +44,7 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        playerNameLabel.text = Player.sharedInstance.name
         gameManager = Game(chosenDifficulty : diffPassedOver)
         cards = gameManager.allCards
         startTimer()
@@ -195,6 +197,8 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         
         
     }
+    
+    
     
     
     

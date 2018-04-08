@@ -9,12 +9,13 @@
 import Foundation
 
 class Player{
-    var name : String
-       
     
-    init(name : String){
-        self.name = name
-    }
+    static let sharedInstance = Player()
+    var name : String = ""
     
+    
+    
+    private init(){}
+
     
 }

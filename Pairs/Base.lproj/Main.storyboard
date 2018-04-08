@@ -150,11 +150,19 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yt3-Yj-0FY">
+                                <rect key="frame" x="16" y="25" width="153" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="iDG-6A-rRY"/>
                     </view>
                     <connections>
+                        <outlet property="playerNameLabel" destination="yt3-Yj-0FY" id="pPf-u2-vfG"/>
                         <outlet property="timerLabel" destination="nLz-q6-IHp" id="HOB-m2-SGM"/>
                         <segue destination="mQs-5A-joq" kind="show" identifier="endGame" id="SxB-6T-l8x"/>
                     </connections>
@@ -195,11 +203,19 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n4S-Pb-tQs">
+                                <rect key="frame" x="32" y="238" width="316" height="98"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="2Nq-hd-4Dn"/>
                     </view>
                     <connections>
+                        <outlet property="nameLabel" destination="n4S-Pb-tQs" id="wzr-3k-dR7"/>
                         <segue destination="DTU-FP-Fj1" kind="show" identifier="startOver" id="yqM-tz-ziG"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="mainMenu" id="3yt-qm-8CT"/>
                     </connections>
@@ -210,7 +226,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="mfi-NP-cEq"/>
-        <segue reference="x5K-xf-e35"/>
+        <segue reference="yqM-tz-ziG"/>
+        <segue reference="3yt-qm-8CT"/>
     </inferredMetricsTieBreakers>
 </document>
