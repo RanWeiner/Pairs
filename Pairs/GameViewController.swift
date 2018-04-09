@@ -13,14 +13,19 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     
+    
+    lazy var gameManager : Game = Game(chosenDifficulty: self.diffPassedOver)
+    
     var countdownTimer = Timer()
     var seconds: Int = 60
+    
+    var allCells = [CollectionViewCell]()
     
     var diffPassedOver : String!
     
     var cards = [Card]()
     
-    var gameManager: Game!
+    //var gameManager: Game!
     
     let cardImages: [UIImage] = [
         UIImage(named: "backofcard")!,
@@ -45,7 +50,7 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         playerNameLabel.text = Player.sharedInstance.name
-        gameManager = Game(chosenDifficulty : diffPassedOver)
+       // gameManager = Game(chosenDifficulty : diffPassedOver)
         cards = gameManager.allCards
         startTimer()
         
@@ -56,19 +61,29 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cards.count
+        return gameManager.numOfCols
        
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return gameManager.numOfRows
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
+        
+        let index = gameManager.numOfCols * indexPath.section + indexPath.item
     
-       
+       print(gameManager.numOfRows)
+         print( "cols")
+        print(gameManager.numOfCols)
         
-         cell.myLabel.text = String(cards[indexPath.item].cardId)
+         cell.myLabel.text = String(cards[index].cardId)
         
-        let index = indexPath.item
+        
+        
+      
         
         if cards[index].isMatched {
         
@@ -81,7 +96,9 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
             cell.cardImage.image = cardImages[0] //show back of the card
         }
         
+        allCells.append(cell)
         return cell
+        
     }
    
     
@@ -90,18 +107,19 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let cell = collectionView.cellForItem(at: indexPath) as! CollectionViewCell
-        let currentIndex = indexPath.item
-       
         
-     
+        let index = gameManager.numOfCols * indexPath.section + indexPath.item
+        
+        print(index)
+    
 
-        gameManager.selectCard(index:  currentIndex)
+        gameManager.selectCard(index:  index)
         
         cards = gameManager.allCards //maybe unesseccery
         
-        if cards[currentIndex].isMatched {
+        if cards[index].isMatched {
         
-            cell.cardImage.image = cardImages[cards[currentIndex].cardId]
+            cell.cardImage.image = cardImages[cards[index].cardId]
             CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
         
             lastCell = nil
@@ -110,12 +128,12 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
                 performSegue(withIdentifier: "endGame", sender: self)
             }
 
-        } else if cards[currentIndex].isOpened {
+        } else if cards[index].isOpened {
             if lastCell == nil {
                 lastCell = cell
             }
     
-            cell.cardImage.image = cardImages[cards[currentIndex].cardId]
+            cell.cardImage.image = cardImages[cards[index].cardId]
             CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
         }
         
@@ -123,7 +141,7 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
             
             if lastCell != nil && lastCell != cell {
                 
-                cell.cardImage.image = cardImages[cards[currentIndex].cardId]
+                cell.cardImage.image = cardImages[cards[index].cardId]
                 CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
                 
                 DispatchQueue.global(qos:.background).asyncAfter(deadline: DispatchTime.now()+1){
