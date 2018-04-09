@@ -14,6 +14,22 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="Qyn-TI-ANo">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="0Ww-Xh-p6Z" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bfC-Ys-Sv3">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="DTU-FP-Fj1" kind="relationship" relationship="rootViewController" id="iOn-Eu-96c"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7KG-js-WWx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1468" y="-824"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="fbx-tq-w5H">
             <objects>
@@ -74,6 +90,7 @@
                                 <state key="normal" title="Start"/>
                                 <connections>
                                     <action selector="buttonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RA2-8Q-8JY"/>
+                                    <segue destination="0Ww-Xh-p6Z" kind="show" identifier="startGame" id="Zwy-Pp-yfp"/>
                                 </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JYk-DK-vHL">
@@ -86,7 +103,6 @@
                     </view>
                     <connections>
                         <outlet property="diffPicker" destination="JYk-DK-vHL" id="kEa-fU-epI"/>
-                        <segue destination="DTU-FP-Fj1" kind="show" identifier="startGame" id="mfi-NP-cEq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -161,10 +177,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="iDG-6A-rRY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="p4o-os-eRj"/>
                     <connections>
                         <outlet property="playerNameLabel" destination="yt3-Yj-0FY" id="pPf-u2-vfG"/>
                         <outlet property="timerLabel" destination="nLz-q6-IHp" id="HOB-m2-SGM"/>
-                        <segue destination="mQs-5A-joq" kind="show" identifier="endGame" id="SxB-6T-l8x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mhR-Jd-GIa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -174,7 +190,7 @@
         <!--End Game View Controller-->
         <scene sceneID="eQh-O2-aV9">
             <objects>
-                <viewController id="mQs-5A-joq" customClass="EndGameViewController" customModule="Pairs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EndGameViewController" id="mQs-5A-joq" customClass="EndGameViewController" customModule="Pairs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pLo-RL-nGT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -216,8 +232,6 @@
                     </view>
                     <connections>
                         <outlet property="nameLabel" destination="n4S-Pb-tQs" id="wzr-3k-dR7"/>
-                        <segue destination="DTU-FP-Fj1" kind="show" identifier="startOver" id="yqM-tz-ziG"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="mainMenu" id="3yt-qm-8CT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EDY-fA-xaa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -225,9 +239,4 @@
             <point key="canvasLocation" x="2302" y="37"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="SxB-6T-l8x"/>
-        <segue reference="yqM-tz-ziG"/>
-        <segue reference="3yt-qm-8CT"/>
-    </inferredMetricsTieBreakers>
 </document>

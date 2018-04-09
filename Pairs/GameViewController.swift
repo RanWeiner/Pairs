@@ -13,19 +13,18 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     
-    
-    lazy var gameManager : Game = Game(chosenDifficulty: self.diffPassedOver)
+    var gameManager : Game?
     
     var countdownTimer = Timer()
     var seconds: Int = 60
     
     var allCells = [CollectionViewCell]()
     
-    var diffPassedOver : String!
-    
+   // var diffPassedOver : String!
+   var diffPassedOver : String = "Easy"
+
     var cards = [Card]()
     
-    //var gameManager: Game!
     
     let cardImages: [UIImage] = [
         UIImage(named: "backofcard")!,
@@ -50,8 +49,8 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         playerNameLabel.text = Player.sharedInstance.name
-       // gameManager = Game(chosenDifficulty : diffPassedOver)
-        cards = gameManager.allCards
+        gameManager = Game(chosenDifficulty: diffPassedOver)
+        cards = gameManager!.allCards
         startTimer()
         
     }
@@ -61,23 +60,19 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return gameManager.numOfCols
+        return gameManager!.numOfCols
        
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return gameManager.numOfRows
+        return gameManager!.numOfRows
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
         
-        let index = gameManager.numOfCols * indexPath.section + indexPath.item
-    
-       print(gameManager.numOfRows)
-         print( "cols")
-        print(gameManager.numOfCols)
+        let index = gameManager!.numOfCols * indexPath.section + indexPath.item
         
          cell.myLabel.text = String(cards[index].cardId)
         
@@ -96,7 +91,7 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
             cell.cardImage.image = cardImages[0] //show back of the card
         }
         
-        allCells.append(cell)
+     
         return cell
         
     }
@@ -108,24 +103,24 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         
         let cell = collectionView.cellForItem(at: indexPath) as! CollectionViewCell
         
-        let index = gameManager.numOfCols * indexPath.section + indexPath.item
+        let index = gameManager!.numOfCols * indexPath.section + indexPath.item
         
-        print(index)
-    
 
-        gameManager.selectCard(index:  index)
+        gameManager!.selectCard(index:  index)
         
-        cards = gameManager.allCards //maybe unesseccery
+        cards = gameManager!.allCards
         
         if cards[index].isMatched {
-        
+            
             cell.cardImage.image = cardImages[cards[index].cardId]
-            CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
+            CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil )
         
             lastCell = nil
             
-            if gameManager.isGameOver() {
-                performSegue(withIdentifier: "endGame", sender: self)
+            if gameManager!.isGameOver() {
+                let storyboard = UIStoryboard(name: "Main" , bundle : nil)
+                let viewController =   storyboard.instantiateViewController(withIdentifier: "EndGameViewController")
+                navigationController?.pushViewController(viewController, animated: true)
             }
 
         } else if cards[index].isOpened {
@@ -144,7 +139,7 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
                 cell.cardImage.image = cardImages[cards[index].cardId]
                 CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
                 
-                DispatchQueue.global(qos:.background).asyncAfter(deadline: DispatchTime.now()+1){
+                DispatchQueue.global(qos:.background).asyncAfter(deadline: .now()+1){
                     DispatchQueue.main.async {
                       
                         self.lastCell?.cardImage.image = self.cardImages[0]
@@ -172,20 +167,11 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
           
             }
  
-        
-
+    
         
     }
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "endGame" {
-            let destinationVC = segue.destination as! EndGameViewController
-            destinationVC.difficulty = diffPassedOver
-            
-        }
-    }
+   
     
     func startTimer(){
         countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
@@ -209,14 +195,15 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         
         let alert = UIAlertController(title: "Oh No!", message: "You run out of time, better luck next time!", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {action in
-            self.performSegue(withIdentifier: "selectDifficulty", sender: self)
+            self.navigationController?.dismiss(animated: true, completion: nil)
+
         }))
-        present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: {
+        })
         
         
     }
-    
-    
+   
     
     
     

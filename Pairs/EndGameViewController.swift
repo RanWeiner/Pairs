@@ -25,26 +25,32 @@ class EndGameViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    
+    /*
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "startOver" {
+      /*  if segue.identifier == "startOver" {
             let destinationVC = segue.destination as! GameViewController
             destinationVC.diffPassedOver = difficulty
            
         }
-            
-        else  if segue.identifier == "mainMenu" {
+        */
+         if segue.identifier == "mainMenu" {
             //let destinationVC = segue.destination as! ViewController
         }
        
     }
+ */
     
     @IBAction func startOverBtnPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "startOver", sender: self)
+        
+        navigationController?.popViewController(animated: true)
+        
     }
     
     @IBAction func mainMenuBtnPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "mainMenu", sender: self)
+        self.navigationController?.dismiss(animated: true, completion: nil)
+
     }
 
 }

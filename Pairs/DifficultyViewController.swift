@@ -46,9 +46,13 @@ class DifficultyViewController: UIViewController , UIPickerViewDataSource, UIPic
     }
 
     @IBAction func buttonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "startGame", sender: self)
+        //navigationController?.pushViewController(<#T##viewController: UIViewController##UIViewController#>, animated: <#T##Bool#>)
+        
+        navigationController?.pushViewController(GameViewController() , animated: true)
+        //performSegue(withIdentifier: "startGame", sender: self)
     }
     
+    /*
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "startGame" {
             let destinationVC = segue.destination as! GameViewController
@@ -56,6 +60,7 @@ class DifficultyViewController: UIViewController , UIPickerViewDataSource, UIPic
         
         }
     }
+ */
     
 }
 
