@@ -46,10 +46,11 @@ class DifficultyViewController: UIViewController , UIPickerViewDataSource, UIPic
     }
 
     @IBAction func buttonPressed(_ sender: Any) {
-        //navigationController?.pushViewController(<#T##viewController: UIViewController##UIViewController#>, animated: <#T##Bool#>)
+      
+        let storyboard = UIStoryboard(name: "Main" , bundle : nil)
+        let viewController =   storyboard.instantiateViewController(withIdentifier: "GameViewController")
+        navigationController?.pushViewController(viewController, animated: true)
         
-        navigationController?.pushViewController(GameViewController() , animated: true)
-        //performSegue(withIdentifier: "startGame", sender: self)
     }
     
     /*

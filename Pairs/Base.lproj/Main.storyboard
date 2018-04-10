@@ -79,7 +79,7 @@
         <!--Difficulty View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="DifficultyViewController" customModule="Pairs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DifficultyViewController" id="BYZ-38-t0r" customClass="DifficultyViewController" customModule="Pairs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -112,7 +112,7 @@
         <!--Game View Controller-->
         <scene sceneID="v9C-hD-7XI">
             <objects>
-                <viewController id="DTU-FP-Fj1" customClass="GameViewController" customModule="Pairs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameViewController" id="DTU-FP-Fj1" customClass="GameViewController" customModule="Pairs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NEV-iQ-UnR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

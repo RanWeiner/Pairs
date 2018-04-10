@@ -76,10 +76,6 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         
          cell.myLabel.text = String(cards[index].cardId)
         
-        
-        
-      
-        
         if cards[index].isMatched {
         
             cell.cardImage.image = cardImages[cards[index].cardId]  //show front of the card
@@ -91,7 +87,7 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
             cell.cardImage.image = cardImages[0] //show back of the card
         }
         
-     
+        allCells.append(cell)
         return cell
         
     }
@@ -105,12 +101,20 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         
         let index = gameManager!.numOfCols * indexPath.section + indexPath.item
         
-
+        if cell.canBeClicked == false {
+            return
+        }
+        
         gameManager!.selectCard(index:  index)
         
         cards = gameManager!.allCards
         
         if cards[index].isMatched {
+            
+            cell.canBeClicked = false
+            cell.isMatched = true
+            lastCell?.canBeClicked = false
+            lastCell?.isMatched = false
             
             cell.cardImage.image = cardImages[cards[index].cardId]
             CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil )
@@ -136,6 +140,8 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
             
             if lastCell != nil && lastCell != cell {
                 
+                disableAllCellsClicks()
+                
                 cell.cardImage.image = cardImages[cards[index].cardId]
                 CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
                 
@@ -149,6 +155,9 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
                         CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromRight, animations: nil, completion: nil)
                         
                         self.lastCell = nil
+                        
+                        self.enableAllCellsClicks()
+                        
                     }
                 }
                 
@@ -202,6 +211,20 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         })
         
         
+    }
+    
+    func disableAllCellsClicks(){
+        for cell in allCells{
+            cell.canBeClicked = false
+        }
+    }
+    
+    func enableAllCellsClicks(){
+        for cell in allCells{
+            if cell.isMatched == false{
+                cell.canBeClicked = true
+            }
+        }
     }
    
     
