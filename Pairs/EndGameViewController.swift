@@ -43,8 +43,9 @@ class EndGameViewController: UIViewController {
  */
     
     @IBAction func startOverBtnPressed(_ sender: UIButton) {
+        //restart game
         
-        navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     

@@ -122,9 +122,7 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
             lastCell = nil
             
             if gameManager!.isGameOver() {
-                let storyboard = UIStoryboard(name: "Main" , bundle : nil)
-                let viewController =   storyboard.instantiateViewController(withIdentifier: "EndGameViewController")
-                navigationController?.pushViewController(viewController, animated: true)
+                finishGameSuccessfully()
             }
 
         } else if cards[index].isOpened {
@@ -181,6 +179,14 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     }
     
    
+    func finishGameSuccessfully(){
+        Card.identifierFactory = 0
+        endTimer()
+        let storyboard = UIStoryboard(name: "Main" , bundle : nil)
+        let viewController =   storyboard.instantiateViewController(withIdentifier: "EndGameViewController")
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     
     func startTimer(){
         countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
@@ -193,15 +199,19 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
             seconds -= 1
         }
         else {
-            countdownTimer.invalidate()
+            endTimer()
             gameOver()
         }
     }
     
-    
+    func endTimer() {
+        countdownTimer.invalidate()
+    }
+
     
     func gameOver(){
-        
+        Card.identifierFactory = 0
+        //stop timer
         let alert = UIAlertController(title: "Oh No!", message: "You run out of time, better luck next time!", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {action in
             self.navigationController?.dismiss(animated: true, completion: nil)

@@ -61,6 +61,7 @@ class Game{
             items.append(card)
         }
         
+        //shuffle
         for _ in 1...items.count{
             let rand = Int(arc4random_uniform(UInt32(items.count)))
             allCards.append(items[rand])
@@ -131,9 +132,7 @@ class Game{
                     lastIndex = -1
                     
                     numOfPairs-=1
-                    if isGameOver(){
-                        print("finito!")
-                    }
+                 
                 }
           
                 else {
