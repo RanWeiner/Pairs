@@ -20,9 +20,9 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     var allCells = [CollectionViewCell]()
     
-   // var diffPassedOver : String!
-   var diffPassedOver : String = "Easy"
-
+    //var diffPassedOver : String!
+   //var diffPassedOver = ""
+   var diffPassedOver : String? = nil
     var cards = [Card]()
     
     
@@ -43,15 +43,20 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     var lastCell : CollectionViewCell?
     
     
+    let TileMargin = CGFloat(2.0)
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        gameManager = Game(chosenDifficulty : Player.sharedInstance.diff)//(chosenDifficulty: diffPassedOver!)
+        cards = gameManager!.allCards
+        startTimer()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         playerNameLabel.text = Player.sharedInstance.name
-        gameManager = Game(chosenDifficulty: diffPassedOver)
-        cards = gameManager!.allCards
-        startTimer()
+       // gameManager = Game(chosenDifficulty: diffPassedOver!)
+       // cards = gameManager!.allCards
+        //startTimer()
         
     }
 
@@ -236,6 +241,22 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
             }
         }
     }
+    
+    @objc func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+        let tmp1 = collectionView.frame.width
+        let tmp2 = collectionView.frame.height
+        let colsCount = CGFloat(gameManager!.numOfCols)
+        let rowsCount = CGFloat(gameManager!.numOfRows)
+        let dimentionsW = (collectionView.frame.width / colsCount) - (colsCount * TileMargin )
+        let dimentionsH = (collectionView.frame.height / rowsCount) - (rowsCount * TileMargin)
+        return CGSize(width: dimentionsW, height: dimentionsH) // collectionView.frame.height * 0.9
+    }
+    
+    @objc func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(TileMargin, TileMargin, TileMargin, TileMargin)
+    }
+    
+    
    
     
     
