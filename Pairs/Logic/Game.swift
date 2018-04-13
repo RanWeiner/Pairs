@@ -69,7 +69,6 @@ class Game{
     }
     
     
-    
     func hasMatch(cardIndex : Int) -> Bool{
        
         if allCards[cardIndex].cardId == allCards[lastIndex].cardId {

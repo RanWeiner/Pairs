@@ -57,26 +57,12 @@ class DifficultyViewController: UIViewController , UIPickerViewDataSource, UIPic
     @IBAction func buttonPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main" , bundle : nil)
         let viewController =   storyboard.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
-        //viewController.diffPassedOver = diffChosen
         Player.sharedInstance.playerDifficulty = diffChosen
-        
-        let backItem = UIBarButtonItem()
-        navigationController?.navigationItem.backBarButtonItem = backItem
-        navigationController?.navigationBar.backItem?.title = "Go Back"
         navigationController?.pushViewController(viewController, animated: true)
         
         
     }
     
-    /*
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "startGame" {
-            let destinationVC = segue.destination as! GameViewController
-            destinationVC.diffPassedOver = diffChosen
-        
-        }
-    }
- */
-    
+
 }
 

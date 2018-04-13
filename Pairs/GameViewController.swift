@@ -62,7 +62,7 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         gameManager = Game(chosenDifficulty : Player.sharedInstance.playerDifficulty)
         cards = gameManager!.allCards
         startTimer()
-        collectionView.reloadData()
+        
         
     }
     
@@ -74,7 +74,10 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
        // cards = gameManager!.allCards
         //startTimer()
         
+        
     }
+    
+
 
     override func didReceiveMemoryWarning() {		
         super.didReceiveMemoryWarning()
@@ -88,6 +91,8 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return gameManager!.numOfRows
     }
+    
+    
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -206,8 +211,7 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         let storyboard = UIStoryboard(name: "Main" , bundle : nil)
         let viewController =   storyboard.instantiateViewController(withIdentifier: "EndGameViewController")
         navigationController?.pushViewController(viewController, animated: true)
-        
-        restart()
+      
     }
     
     
@@ -244,9 +248,6 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         present(alert, animated: true, completion: {
         })
         
-        restart()
-        
-        
     }
     
     func disableAllCellsClicks(){
@@ -280,12 +281,7 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
-    func restart() {
-        //collectionView.reloadData()
-        diffPassedOver = Player.sharedInstance.playerDifficulty
-        seconds = 60
-        
-    }
+   
     
     
    
