@@ -57,10 +57,12 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     
     override func viewWillAppear(_ animated: Bool) {
-       
+       super.viewWillAppear(animated)
+        
         gameManager = Game(chosenDifficulty : Player.sharedInstance.playerDifficulty)
         cards = gameManager!.allCards
         startTimer()
+        collectionView.reloadData()
         
     }
     
@@ -204,6 +206,8 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         let storyboard = UIStoryboard(name: "Main" , bundle : nil)
         let viewController =   storyboard.instantiateViewController(withIdentifier: "EndGameViewController")
         navigationController?.pushViewController(viewController, animated: true)
+        
+        restart()
     }
     
     
@@ -234,10 +238,13 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         let alert = UIAlertController(title: "Oh No!", message: "You run out of time, better luck next time!", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {action in
             self.navigationController?.dismiss(animated: true, completion: nil)
+            //back to difficulty
 
         }))
         present(alert, animated: true, completion: {
         })
+        
+        restart()
         
         
     }
@@ -269,7 +276,15 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     }
     
     @IBAction func backToDifficulty(_ sender: UIButton) {
+        Card.identifierFactory = 0
         self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    func restart() {
+        //collectionView.reloadData()
+        diffPassedOver = Player.sharedInstance.playerDifficulty
+        seconds = 60
+        
     }
     
     
