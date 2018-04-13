@@ -14,12 +14,11 @@ class Game{
     let numOfRowsByDiff = [3,4,5]
     let numOfCols = 4
     
-  
     var allCards = [Card]()
     
     var lastIndex : Int = -1
     
-    var difficulty : String
+    var difficulty : String = ""
     var numOfPairs : Int
     var numOfRows : Int
 

@@ -15,12 +15,16 @@ class DifficultyViewController: UIViewController , UIPickerViewDataSource, UIPic
     let difficulties = ["Easy" , "Medium", "Hard"]
     var diffChosen : String = ""
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         diffPicker.delegate = self
         diffPicker.dataSource = self
         diffChosen = difficulties[0]
         // Do any additional setup after loading the view, typically from a nib.
+        
+       
     }
     
     
@@ -34,6 +38,9 @@ class DifficultyViewController: UIViewController , UIPickerViewDataSource, UIPic
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         diffChosen = difficulties[row]
+       
+       
+        
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -44,12 +51,20 @@ class DifficultyViewController: UIViewController , UIPickerViewDataSource, UIPic
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+
 
     @IBAction func buttonPressed(_ sender: Any) {
-      
         let storyboard = UIStoryboard(name: "Main" , bundle : nil)
-        let viewController =   storyboard.instantiateViewController(withIdentifier: "GameViewController")
+        let viewController =   storyboard.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
+        //viewController.diffPassedOver = diffChosen
+        Player.sharedInstance.playerDifficulty = diffChosen
+        
+        let backItem = UIBarButtonItem()
+        navigationController?.navigationItem.backBarButtonItem = backItem
+        navigationController?.navigationBar.backItem?.title = "Go Back"
         navigationController?.pushViewController(viewController, animated: true)
+        
         
     }
     

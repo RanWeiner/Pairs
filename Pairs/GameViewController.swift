@@ -13,6 +13,12 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     
+    lazy var collectionView: UICollectionView = {
+        let c = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: UICollectionViewLayout())
+        return c
+        
+    }()
+    
     var gameManager : Game?
     
     var countdownTimer = Timer()
@@ -20,9 +26,9 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     var allCells = [CollectionViewCell]()
     
-   // var diffPassedOver : String!
-   var diffPassedOver : String = "Easy"
-
+    //var diffPassedOver : String!
+   //var diffPassedOver = ""
+   var diffPassedOver : String? = nil
     var cards = [Card]()
     
     
@@ -44,14 +50,29 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     
     
+  
     
+    let TileMargin = CGFloat(2.0)
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+       super.viewWillAppear(animated)
+        
+        gameManager = Game(chosenDifficulty : Player.sharedInstance.playerDifficulty)
+        cards = gameManager!.allCards
+        startTimer()
+        collectionView.reloadData()
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         playerNameLabel.text = Player.sharedInstance.name
-        gameManager = Game(chosenDifficulty: diffPassedOver)
-        cards = gameManager!.allCards
-        startTimer()
+       // gameManager = Game(chosenDifficulty: diffPassedOver!)
+       // cards = gameManager!.allCards
+        //startTimer()
         
     }
 
@@ -185,6 +206,8 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         let storyboard = UIStoryboard(name: "Main" , bundle : nil)
         let viewController =   storyboard.instantiateViewController(withIdentifier: "EndGameViewController")
         navigationController?.pushViewController(viewController, animated: true)
+        
+        restart()
     }
     
     
@@ -215,10 +238,13 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         let alert = UIAlertController(title: "Oh No!", message: "You run out of time, better luck next time!", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {action in
             self.navigationController?.dismiss(animated: true, completion: nil)
+            //back to difficulty
 
         }))
         present(alert, animated: true, completion: {
         })
+        
+        restart()
         
         
     }
@@ -236,6 +262,32 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
             }
         }
     }
+    
+    @objc func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+        let colsCount = CGFloat(gameManager!.numOfCols)
+        let rowsCount = CGFloat(gameManager!.numOfRows)
+        let dimentionsW = (collectionView.frame.width / colsCount) - (colsCount * TileMargin )
+        let dimentionsH = (collectionView.frame.height / rowsCount) - (rowsCount * TileMargin)
+        return CGSize(width: dimentionsW, height: dimentionsH)
+    }
+    
+    @objc func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(TileMargin, TileMargin, TileMargin, TileMargin)
+    }
+    
+    @IBAction func backToDifficulty(_ sender: UIButton) {
+        Card.identifierFactory = 0
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    func restart() {
+        //collectionView.reloadData()
+        diffPassedOver = Player.sharedInstance.playerDifficulty
+        seconds = 60
+        
+    }
+    
+    
    
     
     
