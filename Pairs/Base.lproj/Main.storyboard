@@ -14,10 +14,12 @@
         <scene sceneID="Qyn-TI-ANo">
             <objects>
                 <navigationController navigationBarHidden="YES" id="0Ww-Xh-p6Z" sceneMemberID="viewController">
-                    <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bfC-Ys-Sv3">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="a3C-Cs-7Tt">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="DTU-FP-Fj1" kind="relationship" relationship="rootViewController" id="iOn-Eu-96c"/>
                     </connections>
@@ -234,7 +236,7 @@
         <!--Game View Controller-->
         <scene sceneID="v9C-hD-7XI">
             <objects>
-                <viewController storyboardIdentifier="GameViewController" id="DTU-FP-Fj1" customClass="GameViewController" customModule="Pairs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameViewController" id="DTU-FP-Fj1" userLabel="Game View Controller" customClass="GameViewController" customModule="Pairs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NEV-iQ-UnR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -290,7 +292,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yt3-Yj-0FY">
-                                        <rect key="frame" x="0.0" y="31" width="153" height="25"/>
+                                        <rect key="frame" x="70" y="33" width="153" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="20"/>
                                         <nil key="textColor"/>
@@ -303,6 +305,15 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GbG-dS-W2G">
+                                        <rect key="frame" x="8" y="7" width="55" height="73"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="51"/>
+                                        <state key="normal" title="🔙"/>
+                                        <connections>
+                                            <action selector="backToDifficulty:" destination="DTU-FP-Fj1" eventType="touchUpInside" id="JHn-id-Mhi"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.87450980392156863" green="0.91764705882352937" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -316,7 +327,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iDG-6A-rRY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="WXB-ot-vWQ"/>
+                    <navigationItem key="navigationItem" title="Back" id="5gH-mv-kQu"/>
                     <connections>
                         <outlet property="playerNameLabel" destination="yt3-Yj-0FY" id="pPf-u2-vfG"/>
                         <outlet property="timerLabel" destination="nLz-q6-IHp" id="HOB-m2-SGM"/>

@@ -13,6 +13,12 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     
+    lazy var collectionView: UICollectionView = {
+        let c = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: UICollectionViewLayout())
+        return c
+        
+    }()
+    
     var gameManager : Game?
     
     var countdownTimer = Timer()
@@ -43,16 +49,24 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     var lastCell : CollectionViewCell?
     
     
+    
+  
+    
     let TileMargin = CGFloat(2.0)
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
-        gameManager = Game(chosenDifficulty : Player.sharedInstance.diff)//(chosenDifficulty: diffPassedOver!)
+       
+        gameManager = Game(chosenDifficulty : Player.sharedInstance.playerDifficulty)
         cards = gameManager!.allCards
         startTimer()
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         playerNameLabel.text = Player.sharedInstance.name
        // gameManager = Game(chosenDifficulty: diffPassedOver!)
        // cards = gameManager!.allCards
@@ -243,17 +257,19 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     }
     
     @objc func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
-        let tmp1 = collectionView.frame.width
-        let tmp2 = collectionView.frame.height
         let colsCount = CGFloat(gameManager!.numOfCols)
         let rowsCount = CGFloat(gameManager!.numOfRows)
         let dimentionsW = (collectionView.frame.width / colsCount) - (colsCount * TileMargin )
         let dimentionsH = (collectionView.frame.height / rowsCount) - (rowsCount * TileMargin)
-        return CGSize(width: dimentionsW, height: dimentionsH) // collectionView.frame.height * 0.9
+        return CGSize(width: dimentionsW, height: dimentionsH)
     }
     
     @objc func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(TileMargin, TileMargin, TileMargin, TileMargin)
+    }
+    
+    @IBAction func backToDifficulty(_ sender: UIButton) {
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
     
