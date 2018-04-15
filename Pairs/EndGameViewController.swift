@@ -26,28 +26,7 @@ class EndGameViewController: UIViewController {
     }
     
     
-    /*
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-      /*  if segue.identifier == "startOver" {
-            let destinationVC = segue.destination as! GameViewController
-            destinationVC.diffPassedOver = difficulty
-           
-        }
-        */
-         if segue.identifier == "mainMenu" {
-            //let destinationVC = segue.destination as! ViewController
-        }
-       
-    }
- */
-    
-    @IBAction func startOverBtnPressed(_ sender: UIButton) {
-        //restart game
-        
-        self.navigationController?.popViewController(animated: true)
-        
-    }
+ 
     
     @IBAction func mainMenuBtnPressed(_ sender: UIButton) {
         self.navigationController?.dismiss(animated: true, completion: nil)

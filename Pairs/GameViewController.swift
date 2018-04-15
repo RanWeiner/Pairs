@@ -13,22 +13,12 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     
-    lazy var collectionView: UICollectionView = {
-        let c = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: UICollectionViewLayout())
-        return c
-        
-    }()
+ 
     
     var gameManager : Game?
-    
     var countdownTimer = Timer()
     var seconds: Int = 60
-    
     var allCells = [CollectionViewCell]()
-    
-    //var diffPassedOver : String!
-   //var diffPassedOver = ""
-   var diffPassedOver : String? = nil
     var cards = [Card]()
     
     
@@ -47,11 +37,6 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     ]
     
     var lastCell : CollectionViewCell?
-    
-    
-    
-  
-    
     let TileMargin = CGFloat(2.0)
     
     
@@ -68,13 +53,8 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         playerNameLabel.text = Player.sharedInstance.name
-       // gameManager = Game(chosenDifficulty: diffPassedOver!)
-       // cards = gameManager!.allCards
-        //startTimer()
-        
-        
     }
     
 
@@ -99,8 +79,7 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
         
         let index = gameManager!.numOfCols * indexPath.section + indexPath.item
-        
-         cell.myLabel.text = String(cards[index].cardId)
+    
         
         if cards[index].isMatched {
         
@@ -238,11 +217,9 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     func gameOver(){
         Card.identifierFactory = 0
-        //stop timer
         let alert = UIAlertController(title: "Oh No!", message: "You run out of time, better luck next time!", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {action in
             self.navigationController?.dismiss(animated: true, completion: nil)
-            //back to difficulty
 
         }))
         present(alert, animated: true, completion: {
