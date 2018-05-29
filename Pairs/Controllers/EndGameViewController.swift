@@ -26,7 +26,12 @@ class EndGameViewController: UIViewController {
     }
     
     
- 
+    @IBAction func highScoreBtnPressed(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main" , bundle : nil)
+        let viewController =   storyboard.instantiateViewController(withIdentifier: "HighScoreViewController")
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     
     @IBAction func mainMenuBtnPressed(_ sender: UIButton) {
         self.navigationController?.dismiss(animated: true, completion: nil)
