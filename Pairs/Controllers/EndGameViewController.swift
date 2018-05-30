@@ -34,7 +34,7 @@ class EndGameViewController: UIViewController {
     
     
     @IBAction func mainMenuBtnPressed(_ sender: UIButton) {
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        self.navigationController?.popToRootViewController(animated: true)
 
     }
 

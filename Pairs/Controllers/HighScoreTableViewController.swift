@@ -8,14 +8,24 @@
 
 import UIKit
 
+
 class HighScoreTableViewController: UITableViewController {
 
-    var highScoresArray = [HighScore]()
+    var highScoresArray = [HighScoreRecord]()
+    let tableName = Player.sharedInstance.playerDifficulty
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    }
+        
+        if (DataManager.sharedInstance.isTableFull(difficulty: tableName) == false) {
+            highScoresArray = DataManager.sharedInstance.getAllRecords(difficulty: tableName)
+        }
+        
+        //if (currentTableRecords > 0){
+           // highScoresArray = DataManager.sharedInstance.getAllRecords(difficulty: Player.sharedInstance.playerDifficulty)
+      //  }
+        
+    } 
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

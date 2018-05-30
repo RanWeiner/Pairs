@@ -10,18 +10,21 @@ import UIKit
 
 class HighScoreCell: UITableViewCell {
 
-    @IBOutlet weak var rank: UILabel!
-    @IBOutlet weak var score: UILabel!
-    @IBOutlet weak var name: UILabel!
+
     
-    var highScoreRecord: HighScore?
+    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var rankLabel: UILabel!
+    
+    var highScoreRecord: HighScoreRecord?
     
     
-    func setHighScore(hsRank : Int ,hs : HighScore){
+    func setHighScore(hsRank : Int ,hs : HighScoreRecord){
+        
         self.highScoreRecord = hs
-        name.text = hs.playerName
-        score.text = hs.score
-        rank.text = String(hsRank)
+        nameLabel.text = hs.name
+        scoreLabel.text = hs.score
+        rankLabel.text = String(hsRank)
     }
     
 }

@@ -160,37 +160,43 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
                         self.lastCell = nil
                         
                         self.enableAllCellsClicks()
-                        
                     }
                 }
-                
-                
             }
-                
-            
             else {
-                
                 cell.cardImage.image = self.cardImages[0]
                 CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromRight, animations: nil, completion: nil)
                 self.lastCell = nil
-                
-                
             }
-          
             }
- 
-    
-        
     }
     
    
     func finishGameSuccessfully(){
         Card.identifierFactory = 0
-        endTimer()
+         endTimer()
         let storyboard = UIStoryboard(name: "Main" , bundle : nil)
-        let viewController =   storyboard.instantiateViewController(withIdentifier: "EndGameViewController")
-        navigationController?.pushViewController(viewController, animated: true)
-      
+        let totalTimePlayed = Game.GAME_DURATION - seconds
+        let record = HighScore(difficulty : Player.sharedInstance.playerDifficulty , playerName: Player.sharedInstance.name , secondsPlayed : totalTimePlayed)
+     
+        if (gameManager!.hasSetNewRecord(hs: record)  == true){
+            
+            gameManager?.addRecord(hs: record)
+            
+            let alert = UIAlertController(title: "Congrats!", message: "You set a new Record!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {action in
+                let viewController =   storyboard.instantiateViewController(withIdentifier: "HighScoreViewController")
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }))
+            present(alert, animated: true, completion: {
+            })
+        }
+        else {
+           
+            let viewController =   storyboard.instantiateViewController(withIdentifier: "EndGameViewController")
+            navigationController?.pushViewController(viewController, animated: true)
+        }
+
     }
     
     
@@ -219,7 +225,7 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         Card.identifierFactory = 0
         let alert = UIAlertController(title: "Oh No!", message: "You run out of time, better luck next time!", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {action in
-            self.navigationController?.dismiss(animated: true, completion: nil)
+            self.navigationController?.popToRootViewController(animated: true)
 
         }))
         present(alert, animated: true, completion: {
@@ -255,7 +261,7 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     @IBAction func backToDifficulty(_ sender: UIButton) {
         Card.identifierFactory = 0
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     

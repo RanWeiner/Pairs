@@ -39,7 +39,10 @@ class MainViewController: UIViewController {
         }
         
         Player.sharedInstance.name = text
-        performSegue(withIdentifier: "selectDifficulty", sender: self)
+        let storyboard = UIStoryboard(name: "Main" , bundle : nil)
+        let viewController =   storyboard.instantiateViewController(withIdentifier: "DifficultyViewController")
+        
+        navigationController?.pushViewController(viewController, animated: true)
         
     }
 

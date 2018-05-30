@@ -9,6 +9,7 @@
 import Foundation
 
 class Game{
+    static let GAME_DURATION = 60
     let difficulties = ["Easy","Medium","Hard"]
     let numOfOfCardsByDifficulty = [12 , 16 , 20]
     let numOfRowsByDiff = [3,4,5]
@@ -99,6 +100,14 @@ class Game{
     }
     
     
+    func hasSetNewRecord(hs: HighScore) -> Bool {
+        return true
+    }
+    
+    func addRecord(hs: HighScore){
+        DataManager.sharedInstance.saveRecord(hs: hs)
+    }
+ 
     
     
     func selectCard(index : Int){

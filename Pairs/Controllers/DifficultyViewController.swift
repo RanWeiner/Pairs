@@ -11,7 +11,7 @@ import UIKit
 class DifficultyViewController: UIViewController , UIPickerViewDataSource, UIPickerViewDelegate{
 
     @IBOutlet weak var diffPicker: UIPickerView!
-    
+  
     let difficulties = ["Easy" , "Medium", "Hard"]
     var diffChosen : String = ""
     
@@ -52,8 +52,14 @@ class DifficultyViewController: UIViewController , UIPickerViewDataSource, UIPic
         // Dispose of any resources that can be recreated.
     }
     
-
-
+    
+    @IBAction func highScoresBtnPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main" , bundle : nil)
+        let viewController =   storyboard.instantiateViewController(withIdentifier: "HighScoreViewController") 
+        Player.sharedInstance.playerDifficulty = diffChosen
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     @IBAction func buttonPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main" , bundle : nil)
         let viewController =   storyboard.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController

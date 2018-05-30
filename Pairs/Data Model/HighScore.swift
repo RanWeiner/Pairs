@@ -10,10 +10,20 @@ import Foundation
 
 class HighScore {
     var playerName: String!
-    var secondsPlayed = 0
+    var secondsPlayed : Int!
+    var minutesPlayed : Int!
     var difficulty: String!
     var score: String!
     
+    init(difficulty: String , playerName: String , secondsPlayed : Int){
+        self.difficulty = difficulty
+        self.secondsPlayed = secondsPlayed
+        self.playerName = playerName
+        setScore(score : secondsPlayed)
+    }
     
+    func setScore(score: Int){
+        self.score =  String(score) + "sec"
+    }
     
 }
