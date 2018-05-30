@@ -9,13 +9,19 @@
 import UIKit
 
 class HighScoreViewController: UIViewController, UITableViewDataSource , UITableViewDelegate {
-
+  
+    
+    @IBOutlet weak var tableView: UITableView!
+    
   
     var highScoresArray = [HighScoreRecord]()
     let tableName = Player.sharedInstance.playerDifficulty
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         
         if (DataManager.sharedInstance.isTableFull(difficulty: tableName) == false) {
             highScoresArray = DataManager.sharedInstance.getAllRecords(difficulty: tableName)
@@ -33,34 +39,26 @@ class HighScoreViewController: UIViewController, UITableViewDataSource , UITable
     }
     
     // MARK: - Table view data source
-   
-     func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
-    }
-    
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return highScoresArray.count
-    }
-    
-    
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HighScoreCell", for: indexPath) as! HighScoreCell
-        
-        let record = highScoresArray[indexPath.row]
-        
-        cell.setHighScore(hsRank: indexPath.row, hs: record)
-        
-        return cell
-    }
-    
-     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
+
     
     @IBAction func backButtonPressed(_ sender: UIButton) {
          self.navigationController?.popToRootViewController(animated: true)
     }
 
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+         return highScoresArray.count
+       
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! HighScoreCell
+        
+        let record = highScoresArray[indexPath.row]
+        
+        cell.setHighScore(hsRank: indexPath.row + 1, hs: record)
+       
+        return cell
+    }
 
 }

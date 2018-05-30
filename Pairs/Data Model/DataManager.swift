@@ -20,6 +20,10 @@ class DataManager{
     private init(){}
     
     
+  
+    func saveRecordToTable(hs: HighScore){
+        
+    }
     
     func saveRecord(hs : HighScore){
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
