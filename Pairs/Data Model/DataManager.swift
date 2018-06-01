@@ -63,9 +63,6 @@ class DataManager {
             print("Error counting data")
         }
         
-        //debug
-        print(count)
-        
         return count >= MAX_RECORDS_FOR_DIFFICULTY
     }
     
