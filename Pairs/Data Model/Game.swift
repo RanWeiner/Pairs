@@ -100,12 +100,16 @@ class Game{
     }
     
     
-    func hasSetNewRecord(hs: HighScore) -> Bool {
+    func hasSetNewRecord(seconds: Int) -> Bool {
         return true
     }
     
     func addRecord(hs: HighScore){
-        DataManager.sharedInstance.saveRecord(hs: hs)
+        //DataManager.sharedInstance.saveRecord(hs: hs)
+        
+        DataManager.sharedInstance.saveRecordToTable(hs: hs)
+      
+       
     }
  
     

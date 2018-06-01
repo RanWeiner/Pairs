@@ -174,12 +174,12 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
    
     func finishGameSuccessfully(){
         Card.identifierFactory = 0
-         endTimer()
+        endTimer()
         let storyboard = UIStoryboard(name: "Main" , bundle : nil)
-        let totalTimePlayed = Game.GAME_DURATION - seconds
+        let totalTimePlayed = Game.GAME_DURATION - seconds 
         let record = HighScore(difficulty : Player.sharedInstance.playerDifficulty , playerName: Player.sharedInstance.name , secondsPlayed : totalTimePlayed)
      
-        if (gameManager!.hasSetNewRecord(hs: record)  == true){
+        if (gameManager!.hasSetNewRecord(seconds: totalTimePlayed)  == true){
             
             gameManager?.addRecord(hs: record)
             

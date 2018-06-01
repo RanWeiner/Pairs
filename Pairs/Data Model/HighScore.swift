@@ -23,7 +23,7 @@ class HighScore {
     }
     
     func setScore(score: Int){
-        self.score =  String(score) + "sec"
+        self.score =  String(score) + " sec"
     }
     
 }

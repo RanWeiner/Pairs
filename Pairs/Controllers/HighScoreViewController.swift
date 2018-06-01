@@ -15,7 +15,10 @@ class HighScoreViewController: UIViewController, UITableViewDataSource , UITable
     
   
     var highScoresArray = [HighScoreRecord]()
+   // var highScoresArray = [Any]()
     let tableName = Player.sharedInstance.playerDifficulty
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +27,10 @@ class HighScoreViewController: UIViewController, UITableViewDataSource , UITable
         tableView.dataSource = self
         
         if (DataManager.sharedInstance.isTableFull(difficulty: tableName) == false) {
-            highScoresArray = DataManager.sharedInstance.getAllRecords(difficulty: tableName)
-        }
+            
+            highScoresArray = DataManager.sharedInstance.getAllRecordsByDifficulty(difficulty: tableName)
         
-        //if (currentTableRecords > 0){
-        // highScoresArray = DataManager.sharedInstance.getAllRecords(difficulty: Player.sharedInstance.playerDifficulty)
-        //  }
+        }
         
     }
     
