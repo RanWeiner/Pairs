@@ -46,15 +46,15 @@ class DataManager {
   
     
     func deleteLowestRecord(difficulty : String){
-        var lowest = [HighScoreRecord]()
+        var recordsRequested = [HighScoreRecord]()
         let request : NSFetchRequest<HighScoreRecord> = HighScoreRecord.fetchRequest()
         request.predicate = NSPredicate(format: "difficulty = %@", difficulty)
         request.fetchLimit = 1
         request.sortDescriptors = [NSSortDescriptor.init(key: "seconds", ascending: false)]
         do {
-            lowest = try context.fetch(request)
-            let recordToBeDelete = lowest.first
-            context.delete(recordToBeDelete!)
+            recordsRequested = try context.fetch(request)
+            let lowest = recordsRequested.first
+            context.delete(lowest!)
             try context.save()
             
         } catch  {
@@ -104,18 +104,22 @@ class DataManager {
     
     
     func fetchLowestRecordScore(difficulty : String) -> Int {
-        var lowest = [HighScoreRecord]()
+        var recordsRequested = [HighScoreRecord]()
+        var lowest : HighScoreRecord
+        var lowestScore = -1
         let request : NSFetchRequest<HighScoreRecord> = HighScoreRecord.fetchRequest()
         request.predicate = NSPredicate(format: "difficulty = %@", difficulty)
         request.fetchLimit = 1
         request.sortDescriptors = [NSSortDescriptor.init(key: "seconds", ascending: false)]
         do {
-            lowest = try context.fetch(request)
+            recordsRequested = try context.fetch(request)
+            lowest = recordsRequested.first!
+            lowestScore = Int(lowest.seconds)
         } catch  {
              print("Error fetching data from context!")
         }
         
-        return Int(lowest[0].seconds)
+        return lowestScore
     }
     
     
