@@ -13,9 +13,7 @@ class HighScoreViewController: UIViewController, UITableViewDataSource , UITable
     
     @IBOutlet weak var tableView: UITableView!
     
-  
     var highScoresArray = [HighScoreRecord]()
-   // var highScoresArray = [Any]()
     let tableName = Player.sharedInstance.playerDifficulty
 
     
@@ -26,11 +24,9 @@ class HighScoreViewController: UIViewController, UITableViewDataSource , UITable
         tableView.delegate = self
         tableView.dataSource = self
         
-        if (DataManager.sharedInstance.isTableFull(difficulty: tableName) == false) {
-            
-            highScoresArray = DataManager.sharedInstance.getAllRecordsByDifficulty(difficulty: tableName)
+        highScoresArray = DataManager.sharedInstance.getAllRecordsByDifficulty(difficulty: tableName)
         
-        }
+        
         
     }
     

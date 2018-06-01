@@ -99,17 +99,29 @@ class Game{
         allCards[cardIndex].isOpened = false
     }
     
+    func isTableFull( tableName : String) -> Bool {
+        return DataManager.sharedInstance.isTableFull(difficulty: tableName)
+    }
     
-    func hasSetNewRecord(seconds: Int) -> Bool {
+    func betterThenLowestScore(seconds: Int ,  difficulty : String) -> Bool {
+        
+        if (isTableFull(tableName: difficulty) == true){
+        
+            let lowestScore = DataManager.sharedInstance.fetchLowestRecordScore(difficulty: difficulty)
+            if (seconds >= lowestScore){
+                return false
+            }
+        }
         return true
     }
     
+    
+    
     func addRecord(hs: HighScore){
-        //DataManager.sharedInstance.saveRecord(hs: hs)
-        
+        if (isTableFull(tableName: hs.difficulty)){
+            DataManager.sharedInstance.deleteLowestRecord(tableName: Player.sharedInstance.playerDifficulty)
+        }
         DataManager.sharedInstance.saveRecordToTable(hs: hs)
-      
-       
     }
  
     

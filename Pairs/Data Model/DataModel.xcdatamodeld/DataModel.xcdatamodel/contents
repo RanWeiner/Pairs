@@ -1,33 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13241" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Easy" representedClassName="Easy" syncable="YES" codeGenerationType="class">
-        <attribute name="difficulty" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="score" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="seconds" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-    </entity>
-    <entity name="Hard" representedClassName="Hard" syncable="YES" codeGenerationType="class">
-        <attribute name="difficulty" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="score" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="seconds" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-    </entity>
     <entity name="HighScoreRecord" representedClassName="HighScoreRecord" syncable="YES" codeGenerationType="class">
         <attribute name="difficulty" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="score" attributeType="String" syncable="YES"/>
         <attribute name="seconds" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
-    <entity name="Medium" representedClassName="Medium" syncable="YES" codeGenerationType="class">
-        <attribute name="difficulty" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="score" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="seconds" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-    </entity>
     <elements>
-        <element name="Easy" positionX="-63" positionY="9" width="128" height="105"/>
-        <element name="Hard" positionX="-36" positionY="36" width="128" height="105"/>
         <element name="HighScoreRecord" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="Medium" positionX="-45" positionY="9" width="128" height="105"/>
     </elements>
 </model>

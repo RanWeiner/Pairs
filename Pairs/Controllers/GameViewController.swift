@@ -179,10 +179,14 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         let totalTimePlayed = Game.GAME_DURATION - seconds 
         let record = HighScore(difficulty : Player.sharedInstance.playerDifficulty , playerName: Player.sharedInstance.name , secondsPlayed : totalTimePlayed)
      
-        if (gameManager!.hasSetNewRecord(seconds: totalTimePlayed)  == true){
+       
+        if (gameManager!.betterThenLowestScore(seconds: totalTimePlayed , difficulty: Player.sharedInstance.playerDifficulty) == false){
+            let viewController =   storyboard.instantiateViewController(withIdentifier: "EndGameViewController")
+            navigationController?.pushViewController(viewController, animated: true)
             
+        }
+        else {
             gameManager?.addRecord(hs: record)
-            
             let alert = UIAlertController(title: "Congrats!", message: "You set a new Record!", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {action in
                 let viewController =   storyboard.instantiateViewController(withIdentifier: "HighScoreViewController")
@@ -191,12 +195,6 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
             present(alert, animated: true, completion: {
             })
         }
-        else {
-           
-            let viewController =   storyboard.instantiateViewController(withIdentifier: "EndGameViewController")
-            navigationController?.pushViewController(viewController, animated: true)
-        }
-
     }
     
     

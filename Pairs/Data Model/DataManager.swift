@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 
 class DataManager {
-    
+    let MAX_RECORDS_FOR_DIFFICULTY = 10
     static let sharedInstance = DataManager()
     
     var records : [HighScoreRecord]?
@@ -22,7 +22,7 @@ class DataManager {
     
     
   
-    func saveRecordToTable(hs: HighScore) -> Bool{
+    func saveRecordToTable(hs: HighScore){
    
         
         let entity = NSEntityDescription.entity(forEntityName: "HighScoreRecord" , in: context)
@@ -35,69 +35,49 @@ class DataManager {
         
         do{
             try context.save()
-            return true
+            
         }catch{
-            print("error saving record!")
-            return false
+            print("Error saving highscore")
         }
     }
     
     
     
-   /*
-    func fetchRecords(tableName : String) -> [HighScoreRecord] {
-        var allRecords = [HighScoreRecord]()
-        
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: tableName)
-        
-        request.returnsObjectsAsFaults = false
-      
-        
-        do {
-            allRecords = try context.fetch(request) as! [HighScoreRecord]
-            
-        } catch {
-            print("error fetching easy records!")
-        }
-        return allRecords
-    }
-    */
+  
     
-    
-   /*
-    func saveRecord(hs : HighScore){
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-        do{
-            let newRecord = HighScoreRecord(context: context)
-            newRecord.name = hs.playerName
-            newRecord.difficulty = hs.difficulty
-            newRecord.score = hs.score
-            
-            records?.append(newRecord)
+    func deleteLowestRecord(tableName : String){
         
-        try context.save()
-        } catch {
-            print("error saving records!")
-        }
-    
-       
-    }
- */
-   
-    
-    func isTableEmpty(difficulty : String) -> Bool{
-        return false
     }
     
     func isTableFull(difficulty : String) -> Bool {
-        return false
+        
+        var count: Int = 0
+        let request : NSFetchRequest<HighScoreRecord> = HighScoreRecord.fetchRequest()
+        request.returnsObjectsAsFaults = false
+        request.predicate = NSPredicate(format: "difficulty = %@", difficulty)
+        
+        
+        do {
+            count = try context.count(for: request)
+        } catch {
+            print("Error counting data")
+        }
+        
+        //debug
+        print(count)
+        
+        return count >= MAX_RECORDS_FOR_DIFFICULTY
     }
+    
+    
     
     func getAllRecordsByDifficulty(difficulty : String) -> [HighScoreRecord]{
         
         var allRecords = [HighScoreRecord]()
         let request : NSFetchRequest<HighScoreRecord> = HighScoreRecord.fetchRequest()
         request.predicate = NSPredicate(format: "difficulty = %@", difficulty)
+        request.sortDescriptors = [NSSortDescriptor.init(key: "seconds" , ascending: true)]
+        
         do{
            allRecords = try  context.fetch(request)
         }catch {
@@ -107,14 +87,22 @@ class DataManager {
         return allRecords
     }
     
-    func fetchLowestRecord(tableName : String) -> Any? {
-        let userFetch = NSFetchRequest<NSFetchRequestResult>(entityName : tableName)
-        userFetch.fetchLimit = 1
-        userFetch.sortDescriptors = [NSSortDescriptor.init(key: "seconds", ascending: true)]
+    
+    
+    
+    func fetchLowestRecordScore(difficulty : String) -> Int {
+        var lowest = [HighScoreRecord]()
+        let request : NSFetchRequest<HighScoreRecord> = HighScoreRecord.fetchRequest()
+        request.predicate = NSPredicate(format: "difficulty = %@", difficulty)
+        request.fetchLimit = 1
+        request.sortDescriptors = [NSSortDescriptor.init(key: "seconds", ascending: true)]
+        do {
+            lowest = try context.fetch(request)
+        } catch  {
+             print("Error fetching data from context!")
+        }
         
-        userFetch.predicate = NSPredicate(format: "name = %@", "John")
-        let lowest = try! context.fetch(userFetch)
-        return lowest.first
+        return Int(lowest[0].seconds)
     }
     
     
