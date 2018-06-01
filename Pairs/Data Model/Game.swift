@@ -108,6 +108,7 @@ class Game{
         if (isTableFull(tableName: difficulty) == true){
         
             let lowestScore = DataManager.sharedInstance.fetchLowestRecordScore(difficulty: difficulty)
+            print(lowestScore)
             if (seconds >= lowestScore){
                 return false
             }
@@ -119,7 +120,7 @@ class Game{
     
     func addRecord(hs: HighScore){
         if (isTableFull(tableName: hs.difficulty)){
-            DataManager.sharedInstance.deleteLowestRecord(tableName: Player.sharedInstance.playerDifficulty)
+            DataManager.sharedInstance.deleteLowestRecord(difficulty: Player.sharedInstance.playerDifficulty)
         }
         DataManager.sharedInstance.saveRecordToTable(hs: hs)
     }

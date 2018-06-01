@@ -178,7 +178,7 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         let storyboard = UIStoryboard(name: "Main" , bundle : nil)
         let totalTimePlayed = Game.GAME_DURATION - seconds 
         let record = HighScore(difficulty : Player.sharedInstance.playerDifficulty , playerName: Player.sharedInstance.name , secondsPlayed : totalTimePlayed)
-     
+        
        
         if (gameManager!.betterThenLowestScore(seconds: totalTimePlayed , difficulty: Player.sharedInstance.playerDifficulty) == false){
             let viewController =   storyboard.instantiateViewController(withIdentifier: "EndGameViewController")

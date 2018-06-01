@@ -45,9 +45,26 @@ class DataManager {
     
   
     
-    func deleteLowestRecord(tableName : String){
+    func deleteLowestRecord(difficulty : String){
+        var lowest = [HighScoreRecord]()
+        let request : NSFetchRequest<HighScoreRecord> = HighScoreRecord.fetchRequest()
+        request.predicate = NSPredicate(format: "difficulty = %@", difficulty)
+        request.fetchLimit = 1
+        request.sortDescriptors = [NSSortDescriptor.init(key: "seconds", ascending: false)]
+        do {
+            lowest = try context.fetch(request)
+            let recordToBeDelete = lowest.first
+            context.delete(recordToBeDelete!)
+            try context.save()
+            
+        } catch  {
+            print("Error removing data from context!")
+        }
         
+
     }
+    
+    
     
     func isTableFull(difficulty : String) -> Bool {
         
@@ -55,7 +72,6 @@ class DataManager {
         let request : NSFetchRequest<HighScoreRecord> = HighScoreRecord.fetchRequest()
         request.returnsObjectsAsFaults = false
         request.predicate = NSPredicate(format: "difficulty = %@", difficulty)
-        
         
         do {
             count = try context.count(for: request)
@@ -92,7 +108,7 @@ class DataManager {
         let request : NSFetchRequest<HighScoreRecord> = HighScoreRecord.fetchRequest()
         request.predicate = NSPredicate(format: "difficulty = %@", difficulty)
         request.fetchLimit = 1
-        request.sortDescriptors = [NSSortDescriptor.init(key: "seconds", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor.init(key: "seconds", ascending: false)]
         do {
             lowest = try context.fetch(request)
         } catch  {
