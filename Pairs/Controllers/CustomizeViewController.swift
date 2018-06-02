@@ -87,6 +87,9 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
     }
     
     
+    @IBAction func restoreBtnDefaults(_ sender: UIButton) {
+        DataManager.sharedInstance.restoreCardsToDefault()
+    }
     
     @IBAction func backBtnPressed(_ sender: UIButton) {
         self.navigationController?.popToRootViewController(animated: true)
@@ -104,7 +107,6 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
                if url.isURL() && url.isImage(){
                      let web = URL(string: url)
                      self.selectedCell?.cellImage.load(url: web!)
-                     //cell.cellImage.load(url: web!)
                 
                      print("image uploaded successfully!")
                   }
@@ -130,7 +132,6 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         
-        //imageView.image = image
         selectedCell?.cellImage.image = image
         picker.dismiss(animated: true, completion: nil)
         

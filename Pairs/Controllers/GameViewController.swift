@@ -32,7 +32,8 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     override func viewWillAppear(_ animated: Bool) {
        super.viewWillAppear(animated)
         
-        cardImages = DataManager.sharedInstance.getDefaultCardsArray()
+        //cardImages = DataManager.sharedInstance.getDefaultCardsArray()
+        cardImages = DataManager.sharedInstance.getAllImages()
         
         gameManager = Game(chosenDifficulty : Player.sharedInstance.playerDifficulty)
         cards = gameManager!.allCards

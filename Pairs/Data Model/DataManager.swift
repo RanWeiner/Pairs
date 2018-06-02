@@ -15,10 +15,9 @@ class DataManager {
     
     let backOfCardImage: UIImage = UIImage(named: "backofcard")!
     
-    let defaultCardsImages: [UIImage] = [UIImage(named: "banana")!,UIImage(named: "apple")!,UIImage(named: "coconut")!, UIImage(named: "grape" )!,UIImage(named: "kiwi")!,UIImage(named: "orange")!,UIImage(named: "pear")!,UIImage(named: "pinapple")!,UIImage(named: "strawberry")!,UIImage(named: "watermelon")!
-    ]
+    let defaultCardsImages: [UIImage] = [UIImage(named: "banana")!,UIImage(named: "apple")!,UIImage(named: "coconut")!, UIImage(named: "grape" )!,UIImage(named: "kiwi")!,UIImage(named: "orange")!,UIImage(named: "pear")!,UIImage(named: "pinapple")!,UIImage(named: "strawberry")!,UIImage(named: "watermelon")!]
     
-    var activeCards : [UIImage]?
+    var activeCards : [UIImage] = [UIImage(named: "banana")!,UIImage(named: "apple")!,UIImage(named: "coconut")!, UIImage(named: "grape" )!,UIImage(named: "kiwi")!,UIImage(named: "orange")!,UIImage(named: "pear")!,UIImage(named: "pinapple")!,UIImage(named: "strawberry")!,UIImage(named: "watermelon")!]
     
     static let sharedInstance = DataManager()
     
@@ -133,9 +132,17 @@ class DataManager {
         return lowestScore
     }
     
+    func getAllImages() -> [UIImage]{
+        updateAllImages()
+        return activeCards
+    }
     
     
-    func fetchAllImages() {
+    func restoreCardsToDefault() {
+        self.activeCards = self.defaultCardsImages
+    }
+    
+    func updateAllImages() {
         let request = NSFetchRequest<Images>(entityName: "Images")
         do {
            
@@ -143,13 +150,13 @@ class DataManager {
         
             for image in allImages {
                 
-                let index = image.arrayIndex
+                let index = Int(image.arrayIndex)
                 let filePath = image.filePath
                 
                 if FileManager.default.fileExists(atPath: filePath!){
                     let contentsOfFilePath = UIImage(contentsOfFile: filePath!)
                     
-                    activeCards?.append(contentsOfFilePath!)
+                    activeCards[index] = contentsOfFilePath!
                 }
               
             
