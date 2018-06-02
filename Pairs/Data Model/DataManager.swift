@@ -18,12 +18,15 @@ class DataManager {
     let defaultCardsImages: [UIImage] = [UIImage(named: "banana")!,UIImage(named: "apple")!,UIImage(named: "coconut")!, UIImage(named: "grape" )!,UIImage(named: "kiwi")!,UIImage(named: "orange")!,UIImage(named: "pear")!,UIImage(named: "pinapple")!,UIImage(named: "strawberry")!,UIImage(named: "watermelon")!
     ]
     
+    var activeCards : [UIImage]?
+    
     static let sharedInstance = DataManager()
     
     var records : [HighScoreRecord]?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     private init(){}
+    
     
     
     func getDefaultCardsArray() -> [UIImage] {
@@ -124,11 +127,36 @@ class DataManager {
             lowest = recordsRequested.first!
             lowestScore = Int(lowest.seconds)
         } catch  {
-             print("Error fetching data from context!")
+             print("Error fetching highscores from context!")
         }
         
         return lowestScore
     }
     
+    
+    
+    func fetchAllImages() {
+        let request = NSFetchRequest<Images>(entityName: "Images")
+        do {
+           
+            let allImages = try context.fetch(request)
+        
+            for image in allImages {
+                
+                let index = image.arrayIndex
+                let filePath = image.filePath
+                
+                if FileManager.default.fileExists(atPath: filePath!){
+                    let contentsOfFilePath = UIImage(contentsOfFile: filePath!)
+                    
+                    activeCards?.append(contentsOfFilePath!)
+                }
+              
+            
+            }
+        }catch {
+            print("Error fetching Images from context!")
+        }
+    }
     
 }
