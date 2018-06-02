@@ -132,8 +132,8 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         else {
             
             if lastCell != nil && lastCell != cell {
+                collectionView.isUserInteractionEnabled = false
                 
-                disableAllCellsClicks()
                 
                 cell.cardImage.image = cardImages[cards[index].cardId]
                 CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
@@ -149,7 +149,8 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
                         
                         self.lastCell = nil
                         
-                        self.enableAllCellsClicks()
+                         collectionView.isUserInteractionEnabled = true
+                       
                     }
                 }
             }
@@ -221,19 +222,9 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
         
     }
     
-    func disableAllCellsClicks(){
-        for cell in allCells{
-            cell.canBeClicked = false
-        }
-    }
+   
     
-    func enableAllCellsClicks(){
-        for cell in allCells{
-            if cell.isMatched == false{
-                cell.canBeClicked = true
-            }
-        }
-    }
+  
     
     @objc func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         let colsCount = CGFloat(gameManager!.numOfCols)
