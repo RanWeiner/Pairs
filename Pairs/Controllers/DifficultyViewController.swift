@@ -60,6 +60,12 @@ class DifficultyViewController: UIViewController , UIPickerViewDataSource, UIPic
         navigationController?.pushViewController(viewController, animated: true)
     }
     
+    @IBAction func backBtnPressed(_ sender: UIButton) {
+        
+        navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    
     @IBAction func buttonPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main" , bundle : nil)
         let viewController =   storyboard.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
@@ -69,6 +75,14 @@ class DifficultyViewController: UIViewController , UIPickerViewDataSource, UIPic
         
     }
     
-
+    @IBAction func customizeCardsBtnPressed(_ sender: UIButton) {
+        
+        let storyboard = UIStoryboard(name: "Main" , bundle : nil)
+        let viewController =   storyboard.instantiateViewController(withIdentifier: "CustomizeCardsViewController")
+        Player.sharedInstance.playerDifficulty = diffChosen
+        navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
 }
 

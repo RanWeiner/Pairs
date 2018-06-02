@@ -20,22 +20,9 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     var seconds: Int = 60
     var allCells = [CollectionViewCell]()
     var cards = [Card]()
+    var cardImages : [UIImage] = []
     
-    
-    let cardImages: [UIImage] = [
-        UIImage(named: "backofcard")!,
-        UIImage(named: "banana")!,
-        UIImage(named: "apple")!,
-        UIImage(named: "coconut")!,
-        UIImage(named: "grape" )!,
-        UIImage(named: "kiwi")!,
-        UIImage(named: "orange")!,
-        UIImage(named: "pear")!,
-        UIImage(named: "pinapple")!,
-        UIImage(named: "strawberry")!,
-        UIImage(named: "watermelon")!
-    ]
-    
+
     var lastCell : CollectionViewCell?
     let TileMargin = CGFloat(2.0)
     
@@ -43,6 +30,8 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     override func viewWillAppear(_ animated: Bool) {
        super.viewWillAppear(animated)
+        
+        cardImages = DataManager.sharedInstance.getDefaultCardsArray()
         
         gameManager = Game(chosenDifficulty : Player.sharedInstance.playerDifficulty)
         cards = gameManager!.allCards
