@@ -9,8 +9,10 @@
 import UIKit
 
 //class CustomizeCardsViewController: UIViewController ,UICollectionViewDataSource,UICollectionViewDelegate {
-class CustomizeCardsViewController: UIViewController  {
+    class CustomizeCardsViewController: UIViewController {
 
+    var cardsImages : [UIImage] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,13 +20,15 @@ class CustomizeCardsViewController: UIViewController  {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        cardsImages = DataManager.sharedInstance.getDefaultCardsArray()
         
     }
     
     @IBAction func backButtonPressed(_ sender: UIButton) {
         self.navigationController?.popToRootViewController(animated: true)
     }
-    /*
+        
+   /*
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         <#code#>
@@ -40,9 +44,9 @@ class CustomizeCardsViewController: UIViewController  {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         <#code#>
-    }
+    }*/
     
-*/
+
     
 
  

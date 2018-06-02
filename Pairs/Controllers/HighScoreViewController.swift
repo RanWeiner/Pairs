@@ -10,11 +10,17 @@ import UIKit
 
 class HighScoreViewController: UIViewController, UITableViewDataSource , UITableViewDelegate {
   
-    
+    @IBOutlet weak var tableLabel: UILabel!
+   
     @IBOutlet weak var tableView: UITableView!
     
+    
+    @IBOutlet weak var hardBtn: UIButton!
+    @IBOutlet weak var mediumBtn: UIButton!
+    @IBOutlet weak var easyBtn: UIButton!
+    
     var highScoresArray = [HighScoreRecord]()
-    let tableName = Player.sharedInstance.playerDifficulty
+    var tableName = Player.sharedInstance.playerDifficulty
 
     
     
@@ -24,7 +30,14 @@ class HighScoreViewController: UIViewController, UITableViewDataSource , UITable
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableLabel.text = tableName
         highScoresArray = DataManager.sharedInstance.getAllRecordsByDifficulty(difficulty: tableName)
+        
+        toggleButton(difficulty: tableName)
+        setButtons()
+        
+        
+     
         
         
         
@@ -35,7 +48,70 @@ class HighScoreViewController: UIViewController, UITableViewDataSource , UITable
         
     }
     
-    // MARK: - Table view data source
+    
+    
+    func setButtons(){
+        easyBtn.addTarget(self, action: #selector(easyBtnPressed), for: .touchUpInside)
+        mediumBtn.addTarget(self, action: #selector(mediumBtnPressed), for: .touchUpInside)
+        hardBtn.addTarget(self, action: #selector(hardBtnPressed), for: .touchUpInside)
+    }
+    
+    
+    
+    func toggleButton(difficulty : String){
+        switch difficulty {
+        case "Easy":
+            easyBtn.isSelected = true
+            mediumBtn.isSelected = false
+            hardBtn.isSelected = false
+        case "Medium":
+            easyBtn.isSelected = false
+            mediumBtn.isSelected = true
+            hardBtn.isSelected = false
+        case "Hard":
+            easyBtn.isSelected = false
+            mediumBtn.isSelected = false
+            hardBtn.isSelected = true
+            
+        default:
+            print("Error in toggle")
+        }
+    }
+    
+    
+    @objc func easyBtnPressed() {
+        if (easyBtn.isSelected) {
+            return
+        }
+        tableName = "Easy"
+        toggleButton(difficulty: tableName)
+        tableLabel.text = tableName
+        highScoresArray = DataManager.sharedInstance.getAllRecordsByDifficulty(difficulty: tableName)
+        tableView.reloadData()
+    }
+   
+    @objc func mediumBtnPressed() {
+        if (mediumBtn.isSelected) {
+            return
+        }
+        tableName = "Medium"
+        toggleButton(difficulty: tableName)
+        tableLabel.text = tableName
+        highScoresArray = DataManager.sharedInstance.getAllRecordsByDifficulty(difficulty: tableName)
+        tableView.reloadData()
+    }
+    
+    @objc func hardBtnPressed() {
+        if (hardBtn.isSelected) {
+            return
+        }
+        tableName = "Hard"
+        toggleButton(difficulty: tableName)
+        tableLabel.text = tableName
+        highScoresArray = DataManager.sharedInstance.getAllRecordsByDifficulty(difficulty: tableName)
+        tableView.reloadData()
+    }
+    
 
     
     @IBAction func backButtonPressed(_ sender: UIButton) {
@@ -57,5 +133,9 @@ class HighScoreViewController: UIViewController, UITableViewDataSource , UITable
        
         return cell
     }
-
+    
+  
+    
 }
+
+

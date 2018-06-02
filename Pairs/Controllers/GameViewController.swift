@@ -21,6 +21,7 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     var allCells = [CollectionViewCell]()
     var cards = [Card]()
     var cardImages : [UIImage] = []
+    let backOfCardImage : UIImage = DataManager.sharedInstance.backOfCardImage
     
 
     var lastCell : CollectionViewCell?
@@ -78,7 +79,7 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
             cell.cardImage.image = cardImages[cards[index].cardId]  //show front of the card
         }
         else {
-            cell.cardImage.image = cardImages[0] //show back of the card
+            cell.cardImage.image = backOfCardImage //show back of the card
         }
         
         allCells.append(cell)
@@ -140,10 +141,10 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
                 DispatchQueue.global(qos:.background).asyncAfter(deadline: .now()+1){
                     DispatchQueue.main.async {
                       
-                        self.lastCell?.cardImage.image = self.cardImages[0]
+                        self.lastCell?.cardImage.image = self.backOfCardImage
                         CollectionViewCell.transition(with: self.lastCell!, duration: 0.3, options: .transitionFlipFromRight, animations: nil, completion: nil)
                         
-                        cell.cardImage.image = self.cardImages[0]
+                        cell.cardImage.image = self.backOfCardImage
                         CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromRight, animations: nil, completion: nil)
                         
                         self.lastCell = nil
@@ -153,7 +154,7 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
                 }
             }
             else {
-                cell.cardImage.image = self.cardImages[0]
+                cell.cardImage.image = backOfCardImage
                 CollectionViewCell.transition(with: cell, duration: 0.3, options: .transitionFlipFromRight, animations: nil, completion: nil)
                 self.lastCell = nil
             }

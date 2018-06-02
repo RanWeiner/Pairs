@@ -21,7 +21,8 @@ struct Card{
     
  
     static func getUniqueIdentifier() -> Int{
+        let id = identifierFactory
         identifierFactory+=1
-        return identifierFactory
+        return id
     }
 }

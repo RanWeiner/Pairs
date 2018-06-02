@@ -13,7 +13,9 @@ import CoreData
 class DataManager {
     let MAX_RECORDS_FOR_DIFFICULTY = 10
     
-    let defaultCardsImages: [UIImage] = [UIImage(named: "backofcard")!,UIImage(named: "banana")!,UIImage(named: "apple")!,UIImage(named: "coconut")!, UIImage(named: "grape" )!,UIImage(named: "kiwi")!,UIImage(named: "orange")!,UIImage(named: "pear")!,UIImage(named: "pinapple")!,UIImage(named: "strawberry")!,UIImage(named: "watermelon")!
+    let backOfCardImage: UIImage = UIImage(named: "backofcard")!
+    
+    let defaultCardsImages: [UIImage] = [UIImage(named: "banana")!,UIImage(named: "apple")!,UIImage(named: "coconut")!, UIImage(named: "grape" )!,UIImage(named: "kiwi")!,UIImage(named: "orange")!,UIImage(named: "pear")!,UIImage(named: "pinapple")!,UIImage(named: "strawberry")!,UIImage(named: "watermelon")!
     ]
     
     static let sharedInstance = DataManager()

@@ -10,4 +10,7 @@ import Foundation
 
 class CustomizeCardsCell :  UICollectionViewCell {
     
+    @IBOutlet weak var cardImage: UIImageView!
+    
+    
 }
