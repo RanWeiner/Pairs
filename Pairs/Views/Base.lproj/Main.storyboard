@@ -371,59 +371,66 @@
             </objects>
             <point key="canvasLocation" x="1456.521739130435" y="36.684782608695656"/>
         </scene>
-        <!--Customize Cards View Controller-->
+        <!--Customize View Controller-->
         <scene sceneID="fkq-uG-AkV">
             <objects>
-                <viewController storyboardIdentifier="CustomizeCardsViewController" id="lJt-b5-Ow8" customClass="CustomizeCardsViewController" customModule="Pairs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CustomizeViewController" id="lJt-b5-Ow8" customClass="CustomizeViewController" customModule="Pairs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RMa-dN-nIn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MpE-JP-hL7" userLabel="TopConatiner">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="86"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="79"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Sj-H8-hWt">
-                                        <rect key="frame" x="8" y="11" width="74" height="75"/>
+                                        <rect key="frame" x="8" y="16" width="64" height="59"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="51"/>
                                         <state key="normal" title="🔙"/>
                                         <connections>
-                                            <action selector="backButtonPressed:" destination="lJt-b5-Ow8" eventType="touchUpInside" id="3XP-jo-s1U"/>
+                                            <action selector="backBtnPressed:" destination="lJt-b5-Ow8" eventType="touchUpInside" id="dhL-gZ-d54"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5Qo-gb-MJZ">
-                                <rect key="frame" x="0.0" y="94" width="414" height="539"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="y2v-ko-fax">
+                                <rect key="frame" x="0.0" y="87" width="414" height="582"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cSC-nC-uqk">
-                                    <size key="itemSize" width="70" height="92"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0pQ-4I-nvu">
+                                    <size key="itemSize" width="89" height="103"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="CustomizeCardsCell" reuseIdentifier="CustomizeCardsCell" id="riy-qg-KCg" customClass="CustomizeCardsCell">
-                                        <rect key="frame" x="0.0" y="0.0" width="70" height="92"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="fo2-cn-ren" customClass="CustomizeCardsViewCell" customModule="Pairs" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="89" height="103"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="70" height="92"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="89" height="103"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AKP-yx-BZJ">
-                                                    <rect key="frame" x="-75" y="-11" width="240" height="128"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUr-rQ-nd9">
+                                                    <rect key="frame" x="27" y="34" width="42" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <connections>
-                                            <outlet property="cardImage" destination="AKP-yx-BZJ" id="xcm-yd-eLF"/>
+                                            <outlet property="cellLabel" destination="aUr-rQ-nd9" id="UND-0l-YCf"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="lJt-b5-Ow8" id="Vei-pd-6jg"/>
+                                    <outlet property="delegate" destination="lJt-b5-Ow8" id="RLw-1h-2ap"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

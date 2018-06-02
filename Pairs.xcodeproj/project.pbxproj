@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C049DA920C2C9BC00689571 /* CustomizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C049DA820C2C9BC00689571 /* CustomizeViewController.swift */; };
+		0C049DAD20C2CDF200689571 /* CustomizeCardsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C049DAC20C2CDF200689571 /* CustomizeCardsViewCell.swift */; };
 		0C12F5942072467600703F86 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C12F5932072467600703F86 /* MainViewController.swift */; };
 		0C12F59620724BF600703F86 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C12F59520724BF600703F86 /* Card.swift */; };
 		0C12F5992072796E00703F86 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C12F5982072796E00703F86 /* Player.swift */; };
@@ -21,14 +23,14 @@
 		0C96592120BC9A480073C2BB /* HighScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96592020BC9A480073C2BB /* HighScore.swift */; };
 		0C98A720206BF6520077D7D2 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C98A71F206BF6520077D7D2 /* GameViewController.swift */; };
 		0C98A722206C12E90077D7D2 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C98A721206C12E90077D7D2 /* CollectionViewCell.swift */; };
-		0CC7633920C1A39300BFE0C7 /* CustomizeCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC7633820C1A39300BFE0C7 /* CustomizeCardsViewController.swift */; };
-		0CC7633B20C1A65400BFE0C7 /* CustomizeCardsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC7633A20C1A65400BFE0C7 /* CustomizeCardsCell.swift */; };
 		0CFAB8DD20BD5D88005BEDCB /* HighScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAB8DC20BD5D88005BEDCB /* HighScoreCell.swift */; };
 		0CFAB90520BD79B0005BEDCB /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAB90320BD79B0005BEDCB /* DataModel.xcdatamodeld */; };
 		0CFAB90720BD85AE005BEDCB /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFAB90620BD85AE005BEDCB /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C049DA820C2C9BC00689571 /* CustomizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeViewController.swift; sourceTree = "<group>"; };
+		0C049DAC20C2CDF200689571 /* CustomizeCardsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeCardsViewCell.swift; sourceTree = "<group>"; };
 		0C12F5932072467600703F86 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0C12F59520724BF600703F86 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		0C12F5982072796E00703F86 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -45,8 +47,6 @@
 		0C96592020BC9A480073C2BB /* HighScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScore.swift; sourceTree = "<group>"; };
 		0C98A71F206BF6520077D7D2 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		0C98A721206C12E90077D7D2 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
-		0CC7633820C1A39300BFE0C7 /* CustomizeCardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeCardsViewController.swift; sourceTree = "<group>"; };
-		0CC7633A20C1A65400BFE0C7 /* CustomizeCardsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeCardsCell.swift; sourceTree = "<group>"; };
 		0CFAB8DC20BD5D88005BEDCB /* HighScoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScoreCell.swift; sourceTree = "<group>"; };
 		0CFAB90420BD79B0005BEDCB /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		0CFAB90620BD85AE005BEDCB /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 				0C4AC9F4206BDC00004803C3 /* Main.storyboard */,
 				0CFAB8DC20BD5D88005BEDCB /* HighScoreCell.swift */,
 				0C98A721206C12E90077D7D2 /* CollectionViewCell.swift */,
-				0CC7633A20C1A65400BFE0C7 /* CustomizeCardsCell.swift */,
+				0C049DAC20C2CDF200689571 /* CustomizeCardsViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -124,7 +124,7 @@
 				0C12F5932072467600703F86 /* MainViewController.swift */,
 				0C98A71F206BF6520077D7D2 /* GameViewController.swift */,
 				0C19F87A20BEE75B00C94767 /* HighScoreViewController.swift */,
-				0CC7633820C1A39300BFE0C7 /* CustomizeCardsViewController.swift */,
+				0C049DA820C2C9BC00689571 /* CustomizeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -213,19 +213,19 @@
 				0C4AC9F3206BDC00004803C3 /* DifficultyViewController.swift in Sources */,
 				0C12F59620724BF600703F86 /* Card.swift in Sources */,
 				0C98A720206BF6520077D7D2 /* GameViewController.swift in Sources */,
-				0CC7633B20C1A65400BFE0C7 /* CustomizeCardsCell.swift in Sources */,
 				0CFAB90720BD85AE005BEDCB /* DataManager.swift in Sources */,
-				0CC7633920C1A39300BFE0C7 /* CustomizeCardsViewController.swift in Sources */,
 				0C98A722206C12E90077D7D2 /* CollectionViewCell.swift in Sources */,
 				0C96592120BC9A480073C2BB /* HighScore.swift in Sources */,
 				0C12F5992072796E00703F86 /* Player.swift in Sources */,
 				0C4AC9F1206BDC00004803C3 /* AppDelegate.swift in Sources */,
+				0C049DA920C2C9BC00689571 /* CustomizeViewController.swift in Sources */,
 				0CFAB8DD20BD5D88005BEDCB /* HighScoreCell.swift in Sources */,
 				0C12F5942072467600703F86 /* MainViewController.swift in Sources */,
 				0C19F87B20BEE75B00C94767 /* HighScoreViewController.swift in Sources */,
 				0CFAB90520BD79B0005BEDCB /* DataModel.xcdatamodeld in Sources */,
 				0C12F59B20727B4400703F86 /* Game.swift in Sources */,
 				0C422EF02078C92B00BF5E9D /* EndGameViewController.swift in Sources */,
+				0C049DAD20C2CDF200689571 /* CustomizeCardsViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

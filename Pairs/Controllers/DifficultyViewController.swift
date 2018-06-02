@@ -78,7 +78,7 @@ class DifficultyViewController: UIViewController , UIPickerViewDataSource, UIPic
     @IBAction func customizeCardsBtnPressed(_ sender: UIButton) {
         
         let storyboard = UIStoryboard(name: "Main" , bundle : nil)
-        let viewController =   storyboard.instantiateViewController(withIdentifier: "CustomizeCardsViewController")
+        let viewController =   storyboard.instantiateViewController(withIdentifier: "CustomizeViewController")
         Player.sharedInstance.playerDifficulty = diffChosen
         navigationController?.pushViewController(viewController, animated: true)
         
