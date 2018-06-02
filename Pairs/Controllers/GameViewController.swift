@@ -254,27 +254,6 @@ class GameViewController: UIViewController,UICollectionViewDataSource,UICollecti
     
     
    
-    func uploadFromUrl(){
-        var textField = UITextField()
-        
-        let alert = UIAlertController(title: "Upload from URL" , message: "" , preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: "Upload" , style: .default){ (action) in
-            print("image uploaded successfully!")
-            
-        }
-        
-        alert.addTextField {(alertTextField) in
-            alertTextField.placeholder = "Enter URL"
-            textField = alertTextField
-        }
-        
-        alert.addAction(action)
-        
-        present(alert , animated: true ,completion:  nil)
-    }
-    
-   
     
     
     

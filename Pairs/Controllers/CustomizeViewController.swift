@@ -38,7 +38,17 @@ class CustomizeViewController: UIViewController , UICollectionViewDataSource,UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomizeCardsViewCell
         cell.cellLabel.text = String(indexPath.item)
+        cell.cellImage.image = cardImages[indexPath.item]
         return cell
+    }
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let cell = collectionView.cellForItem(at: indexPath) as! CustomizeCardsViewCell
+        
+    
     }
     
     
