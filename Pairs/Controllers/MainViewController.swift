@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
 
     override func didReceiveMemoryWarning() {

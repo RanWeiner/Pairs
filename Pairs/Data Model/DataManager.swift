@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 
 class DataManager {
-    let MAX_RECORDS_FOR_DIFFICULTY = 10
+    let maxRecordsForDifficulty = 10
     
     let backOfCardImage: UIImage = UIImage(named: "backofcard")!
     
@@ -19,22 +19,22 @@ class DataManager {
     
     var activeCards : [UIImage] = [UIImage(named: "banana")!,UIImage(named: "apple")!,UIImage(named: "coconut")!, UIImage(named: "grape" )!,UIImage(named: "kiwi")!,UIImage(named: "orange")!,UIImage(named: "pear")!,UIImage(named: "pinapple")!,UIImage(named: "strawberry")!,UIImage(named: "watermelon")!]
     
-    static let sharedInstance = DataManager()
-    
     var records : [HighScoreRecord]?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    static let sharedInstance = DataManager()
+    
+    
     
     private init(){}
     
     
+
+      /***** Records Storage *****/
     
-    func getDefaultCardsArray() -> [UIImage] {
-        return self.defaultCardsImages
-    }
-  
+
     func saveRecordToTable(hs: HighScore){
    
-        
         let entity = NSEntityDescription.entity(forEntityName: "HighScoreRecord" , in: context)
         let manageObject = NSManagedObject(entity: entity!, insertInto: context)
         
@@ -89,7 +89,7 @@ class DataManager {
             print("Error counting data")
         }
         
-        return count >= MAX_RECORDS_FOR_DIFFICULTY
+        return count >= maxRecordsForDifficulty
     }
     
     
@@ -132,38 +132,73 @@ class DataManager {
         return lowestScore
     }
     
+    
+    
+    
+    /***** Card Storage *****/
+    
     func getAllImages() -> [UIImage]{
-        updateAllImages()
+        updateCardsFromTable()
         return activeCards
     }
     
     
+    
+    func getDefaultCardsArray() -> [UIImage] {
+        return self.defaultCardsImages
+    }
+    
+    
     func restoreCardsToDefault() {
+        //todo clear the table
+        
         self.activeCards = self.defaultCardsImages
     }
     
-    func updateAllImages() {
-        let request = NSFetchRequest<Images>(entityName: "Images")
-        do {
-           
-            let allImages = try context.fetch(request)
+    func saveImage(image : UIImage , index: Int) {
         
+        let data = UIImagePNGRepresentation(image) as NSData?
+        
+        let entity = NSEntityDescription.entity(forEntityName: "Images" , in: context)
+        let manageObject = NSManagedObject(entity: entity!, insertInto: context)
+        
+        manageObject.setValue(data, forKey: "data")
+        manageObject.setValue(index, forKey: "arrayIndex")
+        
+        
+        do{
+            try context.save()
+            
+        }catch{
+            print("Error saving highscore")
+        }
+        
+    }
+    
+    func updateCardsFromTable(){
+        let request = NSFetchRequest<Images>(entityName: "Images")
+      
+        do {
+            
+            let allImages = try context.fetch(request)
+          
             for image in allImages {
                 
                 let index = Int(image.arrayIndex)
-                let filePath = image.filePath
-                
-                if FileManager.default.fileExists(atPath: filePath!){
-                    let contentsOfFilePath = UIImage(contentsOfFile: filePath!)
-                    
-                    activeCards[index] = contentsOfFilePath!
+                if let imageData = image.data as Data? {
+                    activeCards[index] = UIImage(data: imageData)!
                 }
-              
-            
+                else {
+                    activeCards[index] = UIImage(named: "icon")!
+                }
             }
-        }catch {
+            
+         }catch {
             print("Error fetching Images from context!")
         }
+        
+        
     }
+    
     
 }

@@ -8,11 +8,10 @@
     </entity>
     <entity name="Images" representedClassName="Images" syncable="YES" codeGenerationType="class">
         <attribute name="arrayIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="filePath" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="data" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Images" positionX="-63" positionY="9" width="128" height="90"/>
         <element name="HighScoreRecord" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="Images" positionX="-63" positionY="9" width="128" height="75"/>
     </elements>
 </model>

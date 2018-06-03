@@ -27,7 +27,8 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        cardImages = DataManager.sharedInstance.getDefaultCardsArray()
+       // cardImages = DataManager.sharedInstance.getDefaultCardsArray()
+        cardImages = DataManager.sharedInstance.getAllImages()
     }
     
 
@@ -37,7 +38,22 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomizeCardsViewCell
-        cell.cellLabel.text = String(indexPath.item)
+        cell.setIndex(index: indexPath.item)
+        
+        if (indexPath.item < 6){
+                cell.cellLabel.text = "Easy"
+                cell.backgroundColor = UIColor.yellow
+        }
+        else if (indexPath.item < 8)
+        {
+            cell.cellLabel.text = "Medium"
+            cell.backgroundColor = UIColor.blue
+        }
+        else {
+            cell.cellLabel.text = "Hard"
+            cell.backgroundColor = UIColor.red
+        }
+        //cell.cellLabel.text = String(indexPath.item)
         cell.cellImage.image = cardImages[indexPath.item]
         return cell
     }
@@ -87,6 +103,16 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
     }
     
     
+    @IBAction func infoBtnPressed(_ sender: UIButton) {
+        let text = "The yellow represents the cards in Easy mode\n"
+        + "\nThe blue represents the cards in both Easy and Medium modes\n"
+        + "\nThe red represents the cards in all modes\n"
+        
+        let alert = UIAlertController(title: "Note", message: text , preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Got it", style: UIAlertActionStyle.default, handler: nil))
+        present(alert, animated: true, completion: nil)
+        
+    }
     @IBAction func restoreBtnDefaults(_ sender: UIButton) {
         DataManager.sharedInstance.restoreCardsToDefault()
     }
@@ -130,10 +156,11 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
     
     
     func imagePickerController(_ picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [String : Any]) {
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let pickedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         
-        selectedCell?.cellImage.image = image
+        selectedCell?.cellImage.image = pickedImage
         picker.dismiss(animated: true, completion: nil)
+        DataManager.sharedInstance.saveImage(image: pickedImage, index: (selectedCell?.getIndex())!)
         
     }
     
