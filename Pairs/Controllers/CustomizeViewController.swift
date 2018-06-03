@@ -27,7 +27,6 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       // cardImages = DataManager.sharedInstance.getDefaultCardsArray()
         cardImages = DataManager.sharedInstance.getAllImages()
     }
     
@@ -53,7 +52,7 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
             cell.cellLabel.text = "Hard"
             cell.backgroundColor = UIColor.red
         }
-        //cell.cellLabel.text = String(indexPath.item)
+       
         cell.cellImage.image = cardImages[indexPath.item]
         return cell
     }
@@ -113,8 +112,11 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
         present(alert, animated: true, completion: nil)
         
     }
+    
     @IBAction func restoreBtnDefaults(_ sender: UIButton) {
         DataManager.sharedInstance.restoreCardsToDefault()
+        
+    
     }
     
     @IBAction func backBtnPressed(_ sender: UIButton) {
@@ -163,6 +165,7 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
         DataManager.sharedInstance.saveImage(image: pickedImage, index: (selectedCell?.getIndex())!)
         
     }
+    
     
     func imagePickerControllerDidCancel(_ picker:
         UIImagePickerController) {

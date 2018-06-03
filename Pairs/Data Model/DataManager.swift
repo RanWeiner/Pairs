@@ -22,6 +22,7 @@ class DataManager {
     var records : [HighScoreRecord]?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    
     static let sharedInstance = DataManager()
     
     
@@ -150,10 +151,34 @@ class DataManager {
     
     
     func restoreCardsToDefault() {
-        //todo clear the table
-        
+        clearImagesTable()
         self.activeCards = self.defaultCardsImages
     }
+    
+    
+    func clearImagesTable(){
+        let request = NSFetchRequest<Images>(entityName: "Images")
+        request.returnsObjectsAsFaults = false
+        do {
+            
+            let allImages = try context.fetch(request)
+            
+            if allImages.count  > 0 {
+                
+                for image in allImages {
+                    context.delete(image)
+                }
+                try context.save()
+            }
+            
+           
+            
+        }catch {
+            print("Error saving data after removing objects from context!")
+        }
+        
+    }
+    
     
     func saveImage(image : UIImage , index: Int) {
         
@@ -181,23 +206,22 @@ class DataManager {
         do {
             
             let allImages = try context.fetch(request)
-          
-            for image in allImages {
+            if allImages.count  > 0 {
                 
-                let index = Int(image.arrayIndex)
-                if let imageData = image.data as Data? {
-                    activeCards[index] = UIImage(data: imageData)!
-                }
-                else {
-                    activeCards[index] = UIImage(named: "icon")!
+                for image in allImages {
+                    
+                    let index = Int(image.arrayIndex)
+                    if let imageData = image.data as Data? {
+                        activeCards[index] = UIImage(data: imageData)!
+                    }
+                    else {
+                        activeCards[index] = UIImage(named: "icon")!
+                    }
                 }
             }
-            
          }catch {
             print("Error fetching Images from context!")
         }
-        
-        
     }
     
     
