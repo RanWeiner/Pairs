@@ -10,13 +10,13 @@ import UIKit
 
 class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource,UICollectionViewDelegate {
     
+    @IBOutlet weak var collectionView: UICollectionView!
     var selectedCell: CustomizeCardsViewCell?
     var cardImages : [UIImage] = []
    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
     
     }
 
@@ -115,8 +115,6 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
     
     @IBAction func restoreBtnDefaults(_ sender: UIButton) {
         DataManager.sharedInstance.restoreCardsToDefault()
-        
-    
     }
     
     @IBAction func backBtnPressed(_ sender: UIButton) {

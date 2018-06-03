@@ -470,6 +470,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="hGQ-Sx-DG3"/>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="y2v-ko-fax" id="Ruf-Ne-RLA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ojH-8M-NM5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
