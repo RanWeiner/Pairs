@@ -125,13 +125,22 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
                                     
         if let url = textField.text {
                if url.isURL() && url.isImage(){
-                     let web = URL(string: url)
-                     self.selectedCell?.cellImage.load(url: web!)
                 
-                     print("image uploaded successfully!")
+                    let web = URL(string: url)
+                    DispatchQueue.global().async {
+                        if let data = try? Data(contentsOf: web!) {
+                            DispatchQueue.main.async {
+                                let uploadedImage = UIImage(data : data)
+                                DataManager.sharedInstance.saveImage(image: uploadedImage!, index: (self.selectedCell?.getIndex())!)
+                                self.selectedCell?.cellImage.image = uploadedImage
+                            }
+                        }
+                        else {
+                             self.urlErrorAlert()
+                        }
                   }
-                else{
-                    print("Error") //show alert message error
+                  } else{
+                    self.urlNotValidErrorAlert()
                   }
                 }
         }
@@ -145,6 +154,18 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
         alert.addAction(action)
         
         present(alert , animated: true ,completion: nil)
+    }
+    
+    func urlErrorAlert(){
+        let alert = UIAlertController(title: "Oops!", message: "There is no image in the given url...\nPlease try to enter the full path including \"http://\" ", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Got it", style: UIAlertActionStyle.default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func urlNotValidErrorAlert(){
+        let alert = UIAlertController(title: "Oops!", message: "The format of the given url is invalid, please make sure the url is valid", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Got it", style: UIAlertActionStyle.default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     
@@ -168,19 +189,6 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
 }
 
 
-extension UIImageView {
-    func load(url: URL) {
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data){
-                    DispatchQueue.main.async {
-                        self?.image = image
-                    }
-                }
-            }
-        }
-    }
-}
 
 
 extension String {
