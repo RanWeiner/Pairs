@@ -102,19 +102,13 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
     }
     
     
-    @IBAction func infoBtnPressed(_ sender: UIButton) {
-        let text = "The yellow represents the cards in Easy mode\n"
-        + "\nThe blue represents the cards in both Easy and Medium modes\n"
-        + "\nThe red represents the cards in all modes\n"
-        
-        let alert = UIAlertController(title: "Note", message: text , preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Got it", style: UIAlertActionStyle.default, handler: nil))
-        present(alert, animated: true, completion: nil)
-        
-    }
+    
     
     @IBAction func restoreBtnDefaults(_ sender: UIButton) {
         DataManager.sharedInstance.restoreCardsToDefault()
+        cardImages = DataManager.sharedInstance.getAllImages()
+        collectionView.reloadData()
+        
     }
     
     @IBAction func backBtnPressed(_ sender: UIButton) {
