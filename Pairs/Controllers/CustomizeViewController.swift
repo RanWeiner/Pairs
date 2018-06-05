@@ -40,16 +40,16 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
         cell.setIndex(index: indexPath.item)
         
         if (indexPath.item < 6){
-                cell.cellLabel.text = "Easy"
+                cell.cellLabel.text = Game.EASY
                 cell.backgroundColor = UIColor.yellow
         }
         else if (indexPath.item < 8)
         {
-            cell.cellLabel.text = "Medium"
+            cell.cellLabel.text = Game.MEDIUM
             cell.backgroundColor = UIColor.blue
         }
         else {
-            cell.cellLabel.text = "Hard"
+            cell.cellLabel.text = Game.HARD
             cell.backgroundColor = UIColor.red
         }
        

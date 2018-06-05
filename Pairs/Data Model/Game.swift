@@ -10,6 +10,10 @@ import Foundation
 
 class Game{
     static let GAME_DURATION = 60
+    static let EASY = "Easy"
+    static let MEDIUM = "Medium"
+    static let HARD = "Hard"
+    
     let difficulties = ["Easy","Medium","Hard"]
     let numOfOfCardsByDifficulty = [12 , 16 , 20]
     let numOfRowsByDiff = [3,4,5]
@@ -26,8 +30,8 @@ class Game{
     
     init(chosenDifficulty : String){
         self.difficulty = chosenDifficulty
-        
         switch (chosenDifficulty) {
+
         case difficulties[0]:
             self.numOfPairs = numOfOfCardsByDifficulty[0]/2
             self.numOfRows = numOfRowsByDiff[0]

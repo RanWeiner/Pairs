@@ -60,15 +60,17 @@ class HighScoreViewController: UIViewController, UITableViewDataSource , UITable
     
     func toggleButton(difficulty : String){
         switch difficulty {
-        case "Easy":
+        case Game.EASY:
             easyBtn.isSelected = true
             mediumBtn.isSelected = false
             hardBtn.isSelected = false
-        case "Medium":
+            
+        case Game.MEDIUM:
             easyBtn.isSelected = false
             mediumBtn.isSelected = true
             hardBtn.isSelected = false
-        case "Hard":
+            
+        case Game.HARD:
             easyBtn.isSelected = false
             mediumBtn.isSelected = false
             hardBtn.isSelected = true
@@ -83,7 +85,7 @@ class HighScoreViewController: UIViewController, UITableViewDataSource , UITable
         if (easyBtn.isSelected) {
             return
         }
-        tableName = "Easy"
+        tableName = Game.EASY
         toggleButton(difficulty: tableName)
         tableLabel.text = tableName
         highScoresArray = DataManager.sharedInstance.getAllRecordsByDifficulty(difficulty: tableName)
@@ -94,7 +96,7 @@ class HighScoreViewController: UIViewController, UITableViewDataSource , UITable
         if (mediumBtn.isSelected) {
             return
         }
-        tableName = "Medium"
+        tableName = Game.MEDIUM
         toggleButton(difficulty: tableName)
         tableLabel.text = tableName
         highScoresArray = DataManager.sharedInstance.getAllRecordsByDifficulty(difficulty: tableName)
@@ -105,7 +107,7 @@ class HighScoreViewController: UIViewController, UITableViewDataSource , UITable
         if (hardBtn.isSelected) {
             return
         }
-        tableName = "Hard"
+        tableName = Game.HARD
         toggleButton(difficulty: tableName)
         tableLabel.text = tableName
         highScoresArray = DataManager.sharedInstance.getAllRecordsByDifficulty(difficulty: tableName)

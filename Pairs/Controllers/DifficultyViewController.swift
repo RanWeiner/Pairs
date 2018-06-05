@@ -12,8 +12,8 @@ class DifficultyViewController: UIViewController , UIPickerViewDataSource, UIPic
 
     @IBOutlet weak var diffPicker: UIPickerView!
   
-    let difficulties = ["Easy" , "Medium", "Hard"]
-    var diffChosen : String = ""
+    let difficulties = [Game.EASY , Game.MEDIUM, Game.HARD]
+    private var diffChosen : String?
     
     
     
@@ -22,12 +22,9 @@ class DifficultyViewController: UIViewController , UIPickerViewDataSource, UIPic
         diffPicker.delegate = self
         diffPicker.dataSource = self
         diffChosen = difficulties[0]
-        // Do any additional setup after loading the view, typically from a nib.
-        
-       
     }
     
-    
+ 
     public func numberOfComponents(in pickerView: UIPickerView) -> Int{
         return 1
     }
@@ -56,7 +53,7 @@ class DifficultyViewController: UIViewController , UIPickerViewDataSource, UIPic
     @IBAction func highScoresBtnPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main" , bundle : nil)
         let viewController =   storyboard.instantiateViewController(withIdentifier: "HighScoreViewController") 
-        Player.sharedInstance.playerDifficulty = diffChosen
+        Player.sharedInstance.playerDifficulty = diffChosen!
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -69,7 +66,7 @@ class DifficultyViewController: UIViewController , UIPickerViewDataSource, UIPic
     @IBAction func buttonPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main" , bundle : nil)
         let viewController =   storyboard.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
-        Player.sharedInstance.playerDifficulty = diffChosen
+        Player.sharedInstance.playerDifficulty = diffChosen!
         navigationController?.pushViewController(viewController, animated: true)
         
         
@@ -79,7 +76,7 @@ class DifficultyViewController: UIViewController , UIPickerViewDataSource, UIPic
         
         let storyboard = UIStoryboard(name: "Main" , bundle : nil)
         let viewController =   storyboard.instantiateViewController(withIdentifier: "CustomizeViewController")
-        Player.sharedInstance.playerDifficulty = diffChosen
+        Player.sharedInstance.playerDifficulty = diffChosen!
         navigationController?.pushViewController(viewController, animated: true)
         
     }
