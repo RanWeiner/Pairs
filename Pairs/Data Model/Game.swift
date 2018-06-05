@@ -14,7 +14,6 @@ class Game{
     static let MEDIUM = "Medium"
     static let HARD = "Hard"
     
-    let difficulties = ["Easy","Medium","Hard"]
     let numOfOfCardsByDifficulty = [12 , 16 , 20]
     let numOfRowsByDiff = [3,4,5]
     let numOfCols = 4
@@ -23,7 +22,7 @@ class Game{
     
     var lastIndex : Int = -1
     
-    var difficulty : String = ""
+    var difficulty : String?
     var numOfPairs : Int
     var numOfRows : Int
 
@@ -32,15 +31,15 @@ class Game{
         self.difficulty = chosenDifficulty
         switch (chosenDifficulty) {
 
-        case difficulties[0]:
+        case Game.EASY:
             self.numOfPairs = numOfOfCardsByDifficulty[0]/2
             self.numOfRows = numOfRowsByDiff[0]
             
-        case difficulties[1]:
+        case Game.MEDIUM:
             self.numOfPairs = numOfOfCardsByDifficulty[1]/2
             self.numOfRows = numOfRowsByDiff[1]
             
-        case difficulties[2]:
+        case Game.HARD:
             self.numOfPairs = numOfOfCardsByDifficulty[2]/2
             self.numOfRows = numOfRowsByDiff[2]
             
