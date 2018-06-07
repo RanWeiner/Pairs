@@ -12,7 +12,7 @@ class Player{
     
     static let sharedInstance = Player()
     var name : String = ""
-    var playerDifficulty : String = "Easy"
+    var playerDifficulty : String = Game.EASY
  
     
     
