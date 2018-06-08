@@ -41,16 +41,16 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
         
         if (indexPath.item < 6){
                 cell.cellLabel.text = Game.EASY
-                cell.backgroundColor = UIColor.yellow
+                cell.backgroundColor = UIColor(red: 1, green: 223/255, blue: 186/255, alpha: 1)
         }
         else if (indexPath.item < 8)
         {
             cell.cellLabel.text = Game.MEDIUM
-            cell.backgroundColor = UIColor.blue
+            cell.backgroundColor = UIColor(red: 186/255, green: 1, blue: 201/255, alpha: 1)
         }
         else {
             cell.cellLabel.text = Game.HARD
-            cell.backgroundColor = UIColor.red
+            cell.backgroundColor = UIColor(red: 186/255, green: 225/255, blue: 1, alpha: 1)
         }
        
         cell.cellImage.image = cardImages[indexPath.item]

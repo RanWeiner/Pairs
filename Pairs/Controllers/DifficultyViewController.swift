@@ -21,6 +21,7 @@ class DifficultyViewController: UIViewController , UIPickerViewDataSource, UIPic
         super.viewDidLoad()
         diffPicker.delegate = self
         diffPicker.dataSource = self
+        diffPicker.setValue(UIColor.white, forKey: "textColor")
         diffChosen = difficulties[0]
     }
     
