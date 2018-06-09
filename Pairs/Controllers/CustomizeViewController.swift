@@ -132,7 +132,8 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
                         if let data = try? Data(contentsOf: web!) {
                             DispatchQueue.main.async {
                                 let uploadedImage = UIImage(data : data)
-                                DataManager.sharedInstance.saveImage(image: uploadedImage!, index: (self.selectedCell?.getIndex())!)
+                                let resizedImage = uploadedImage?.resizeImage(targetSize: CGSize(width: 99, height: 141))
+                                DataManager.sharedInstance.saveImage(image: resizedImage!, index: (self.selectedCell?.getIndex())!)
                                 self.selectedCell?.cellImage.image = uploadedImage
                             }
                         }
@@ -174,9 +175,10 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [String : Any]) {
         let pickedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         
-        selectedCell?.cellImage.image = pickedImage
+        let resizedImage = pickedImage.resizeImage(targetSize: CGSize(width: 99, height: 141))
+        selectedCell?.cellImage.image = resizedImage
         picker.dismiss(animated: true, completion: nil)
-        DataManager.sharedInstance.saveImage(image: pickedImage, index: (selectedCell?.getIndex())!)
+        DataManager.sharedInstance.saveImage(image: resizedImage, index: (selectedCell?.getIndex())!)
         
     }
     
@@ -186,7 +188,25 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
         picker.dismiss(animated: true, completion: nil)
     }
     
+    
+    
 
+}
+
+extension UIImage {
+    func resizeImage(targetSize: CGSize) -> UIImage {
+        let size = self.size
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+        let newSize = widthRatio > heightRatio ?  CGSize(width: size.width * heightRatio, height: size.height * heightRatio) : CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        self.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
 }
 
 
