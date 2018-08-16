@@ -13,8 +13,9 @@ class CustomizeViewController: UIViewController ,UIImagePickerControllerDelegate
     @IBOutlet weak var collectionView: UICollectionView!
     var selectedCell: CustomizeCardsViewCell?
     var cardImages : [UIImage] = []
-   
-
+    private let numberOfItemsPerRow: CGFloat = 3.0
+    private let sectionInsets = UIEdgeInsets(top: 2.0, left: 2.0, bottom:
+        2.0, right: 2.0)
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -210,7 +211,33 @@ extension UIImage {
 }
 
 
-
+extension CustomizeViewController : UICollectionViewDelegateFlowLayout {
+    
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let paddingSpace = sectionInsets.left * (numberOfItemsPerRow + 1)
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / numberOfItemsPerRow
+        
+        return CGSize(width: widthPerItem, height: widthPerItem)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return sectionInsets
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return sectionInsets.left
+    }
+}
 
 extension String {
     func isImage() -> Bool {
