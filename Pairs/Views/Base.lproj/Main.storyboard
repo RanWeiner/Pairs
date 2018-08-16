@@ -48,6 +48,10 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" spellCheckingType="no" returnKeyType="done"/>
+                                        <connections>
+                                            <action selector="beginEdit:" destination="9Sx-25-ewH" eventType="editingDidBegin" id="KJa-Yc-nPP"/>
+                                            <action selector="editEnd:" destination="9Sx-25-ewH" eventType="editingDidEnd" id="VuP-SN-BCN"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Your Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPW-95-qVd">
                                         <rect key="frame" x="72" y="0.0" width="177" height="29"/>
@@ -414,7 +418,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="99" height="141"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DLx-jg-qCi">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DLx-jg-qCi">
                                                     <rect key="frame" x="0.0" y="0.0" width="99" height="141"/>
                                                 </imageView>
                                             </subviews>

@@ -47,6 +47,24 @@ class MainViewController: UIViewController {
         navigationController?.pushViewController(viewController, animated: true)
         
     }
+    @IBAction func beginEdit(_ sender: UITextField) {
+        animateViewMoving(up: true, moveValue: 100)
+
+    }
+    @IBAction func editEnd(_ sender: UITextField) {
+        animateViewMoving(up: false, moveValue: 100)
+    }
+    
+    
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
+        let movementDuration:TimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        UIView.beginAnimations( "animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration )
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
+    }
 
    
 
